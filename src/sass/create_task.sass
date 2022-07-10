@@ -4,8 +4,24 @@
 .todo__create_task
     +task_panel()
     padding: $padding_task_panel
-    & .create_task
+    & .create__btn
+        min-width: 20px
+        min-height: 20px
+        +button_center()
+        .plus
+            width: 1.5px
+            height: 16px
+            background: $main_color
+            &::after
+                content: ""
+                width: 1.5px
+                height: 16px
+                transform: rotate(90deg)
+                position: absolute
+                background: $main_color
+    & .task__done
         +task_button()
+        display: none
     & .task__text
         +task_text()
         &::placeholder
