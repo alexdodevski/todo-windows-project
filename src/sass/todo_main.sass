@@ -6,9 +6,33 @@
     height: 350px
     width: 100%
     overflow: auto
+    margin-bottom: 10px
     &__task
-        width: 100%
-        border-radius: $border_radius
-        background: $opacity_bg
-        height: 45px
-        margin-bottom: 5px
+        +task_panel()
+        padding: $padding_task_panel
+        & .task__done
+            +task_button()
+            display: flex
+            align-items: center
+            justify-content: center
+            user-select: none
+            &:hover .btn_done
+                display: block
+            .btn_done
+                font-size: 18px
+                color: #2D333B
+                display: none
+        & .task__text
+            +task_text()
+        & .task__important
+            min-width: 20px
+            min-height: 20px
+            display: flex
+            justify-content: center
+            align-items: centera
+            user-select: none
+            cursor: pointer
+            & .btn_important
+                color: $opacity_bg
+            &:active .btn_important
+                color: #2D333B

@@ -9,7 +9,11 @@
       href="https://fonts.googleapis.com/css2?family=Material+Icons"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <title>Microsoft To Do App</title>
   </head>
   <body>
     <div id="app">
@@ -29,10 +33,21 @@
           </div>
         </div>
         <div class="todo__main">
-          <div class="todo__main__task"></div>
+          <div class="todo__main__task">
+            <div class="task__done">
+              <span class="material-symbols-outlined btn_done"> done </span>
+            </div>
+            <input class="task__text"  type="text" readonly></input>
+            <div class="task__important">
+              <span class="material-symbols-outlined btn_important">
+                star
+              </span>
+            </div>
+          </div>
         </div>
         <div class="todo__create_task">
-          <div class="todo__main__task"></div>
+          <div class="create_task"></div>
+          <input type="text" class="task__text" placeholder="Добавить задачу"></input >
         </div>
       </div>
     </div>
