@@ -20,8 +20,12 @@
                 display: none
             & .selected
                 display: block
+        & .task__text_block
+            width: 83%
         & .task__text
             +task_text()
+            &_date
+                font-size: 10px
         & .task__btn_important
             min-width: 20px
             min-height: 20px

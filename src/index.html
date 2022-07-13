@@ -13,7 +13,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
     <title>Microsoft To Do App</title>
   </head>
   <body>
@@ -26,7 +29,7 @@
           </div>
           <div class="todo__header__btns">
             <div class="btn-recommended">
-              <span class="material-icons recommended"> thumb_up_off_alt </span>
+              <span class="material-symbols-outlined recommended"> star </span>
             </div>
             <div class="btn-theme">
               <span class="change_btn"></span>
@@ -36,13 +39,16 @@
         <div class="todo__main">
           <div class="todo__main__task">
             <div class="task__done">
-              <span class="material-symbols-outlined btn_done selected"> done </span>
+              <span class="material-symbols-outlined btn_done"> done </span>
             </div>
-            <input class="task__text"  type="text"></input>
+            <div class="task__text_block">
+              <div class="task__text" contenteditable="" spellcheck="false">
+                <p>Хай брооо</p>
+              </div>
+              <span class="task__text_date">13 июля, среда 23:53</span>
+            </div>
             <div class="task__btn_important">
-              <span class="material-symbols-rounded btn_important selected">
-                stars
-              </span>
+              <span class="material-symbols-rounded btn_important"> star </span>
             </div>
           </div>
         </div>
@@ -51,7 +57,9 @@
           <div class="create__btn">
             <div class="plus"></div>
           </div>
-          <input type="text" class="task__text" placeholder="Добавить задачу"></input >
+          <div class="task__text" spellcheck="false" contenteditable="">
+            <p>Добавить задачу</p>
+          </div>
         </div>
       </div>
     </div>
