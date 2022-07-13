@@ -5,7 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="favicon.ico" />
-    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>Microsoft To Do App</title>
   </head>
-  <body></body>
+  <body>
+    <div id="app">
+      <div class="todo">
+        <div class="todo__header">
+          <div class="todo__header__block">
+            <h1>Мой день</h1>
+            <p class="todo__header__date">пятница, 8 июля</p>
+          </div>
+          <div class="todo__header__btns">
+            <div class="btn-recommended">
+              <span class="material-icons recommended"> thumb_up_off_alt </span>
+            </div>
+            <div class="btn-theme">
+              <span class="change_btn"></span>
+            </div>
+          </div>
+        </div>
+        <div class="todo__main">
+          <div class="todo__main__task">
+            <div class="task__done">
+              <span class="material-symbols-outlined btn_done selected"> done </span>
+            </div>
+            <input class="task__text"  type="text"></input>
+            <div class="task__btn_important">
+              <span class="material-symbols-rounded btn_important selected">
+                stars
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="todo__create_task">
+          <div class="task__done"></div>
+          <div class="create__btn">
+            <div class="plus"></div>
+          </div>
+          <input type="text" class="task__text" placeholder="Добавить задачу"></input >
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
