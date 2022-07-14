@@ -9,3 +9,33 @@
     background: #2D333B
     padding: 20px
     position: relative
+
+.todo_close_btn
+    position: absolute
+    cursor: pointer
+    top: -18px
+    right: 15px
+    width: 24px
+    height: 24px
+    display: flex
+    justify-content: center
+    align-items: center
+    & .close_btn_item
+        width: 2px
+        height: 15px
+        background: #ccc
+        transform: rotate(45deg)
+        position: relative
+        &::after
+            content: ""
+            background: #ccc
+            width: 2px
+            height: 15px
+            top: 0
+            right: 0
+            transform: rotate(90deg)
+            position: absolute
+    &:active .close_btn_item
+        background: $main_color
+    &:active .close_btn_item::after
+        background: $main_color

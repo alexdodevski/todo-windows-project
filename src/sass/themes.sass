@@ -1,0 +1,32 @@
+@import '_mixins'
+@import '_variables'
+
+.todo__themes
+    width: 270px
+    height: 350px
+    background: #fff
+    position: absolute
+    top: 0
+    right: 0
+    border-radius: $border_radius
+    transition-duration: 0.3s
+    transform: translateY(-350px)
+    opacity: 0
+    z-index: -10
+    &.opened
+        +opened(translateY(0))
+    &_header
+        +header_vidget()
+        margin-bottom: 20px
+    &_items
+        display: flex
+        justify-content: space-evenly
+        align-items: center
+        margin-bottom: 10px
+        .themes_item
+            border: 1px solid black
+            width: 80px
+            height: 80px
+            cursor: pointer
+            &.selected
+                border: 2px solid #6acfff
