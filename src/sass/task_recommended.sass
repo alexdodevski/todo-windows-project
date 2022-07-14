@@ -1,0 +1,95 @@
+@import '_mixins'
+@import '_variables'
+
+.task__recommended
+    height: 100%
+    width: 50%
+    background: #fff
+    position: absolute
+    top: 0
+    right: 0
+    border-radius: $border_radius
+    transform: translateX(250px)
+    opacity: 0
+    z-index: -10
+    transition-duration: 0.3s
+    &.opened
+        opacity: 1
+        z-index: 1000
+        transform: translateX(0)
+    & .task__done
+        +button_center()
+        +task_button()
+        & .btn_done
+            font-size: 16px
+            color: $main_color
+            display: none
+        &:hover .btn_done
+            display: block
+    &_header
+        font-size: 18px
+        text-align: center
+        margin-top: 25px
+        position: relative
+    &_tasks
+        width: 100%
+        padding: 5px
+        overflow: auto
+        height: 490px
+    &_item
+        border-bottom: 0.1px solid $main_color
+        padding: 5px
+        display: flex
+        align-items: center
+        column-gap: 10px
+        margin-top: 5px
+        white-space: normal
+        word-break: break-all
+    &_close_btn
+        position: absolute
+        cursor: pointer
+        top: -18px
+        right: 15px
+        width: 24px
+        height: 24px
+        display: flex
+        justify-content: center
+        align-items: center
+        & .close_btn_item
+            width: 2px
+            height: 15px
+            background: #ccc
+            transform: rotate(45deg)
+            position: relative
+            &::after
+                content: ""
+                background: #ccc
+                width: 2px
+                height: 15px
+                top: 0
+                right: 0
+                transform: rotate(90deg)
+                position: absolute
+        &:active .close_btn_item
+            background: $main_color
+        &:active .close_btn_item::after
+            background: $main_color
+.item_recommended_text
+    font-size: $text_font_size
+.item_recommended_date
+    font-size: $date_font_size
+.item_recommended_btn_important
+    min-width: 20px
+    min-height: 20px
+    +button_center()
+    & .btn_important
+        user-select: none
+        color: $main_color
+    &:active .btn_important
+        color: #fff
+.item_recommended_text_content
+    width: 75%
+
+@media screen and ( max-width: 390px  )
+    .task__recommended
+        width: 80%

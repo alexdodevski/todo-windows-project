@@ -7,6 +7,7 @@
     width: 100%
     overflow: auto
     margin-bottom: 10px
+    overflow-x: hidden
     &__task
         +task_panel()
         padding: $padding_task_panel
@@ -14,23 +15,30 @@
             +task_button()
             +button_center()
             & .btn_done
-                font-size: 18px
+                font-size: 16px
                 color: $main_color
-                padding-top: 2px
                 display: none
-            & .selected
+            &:hover .btn_done
+                display: block
+            &.selected .btn_Done
                 display: block
         & .task__text_block
             width: 83%
         & .task__text
             +task_text()
             &_date
-                font-size: 10px
+                font-size: $date_font_size
         & .task__btn_important
             min-width: 20px
             min-height: 20px
             +button_center()
             & .btn_important
                 color: $main_color
-            & .selected
-                color: $opacity_bg
+        & .selected .btn_important
+            color: $opacity_bg
+
+@media screen and ( max-width: 500px )
+    .todo
+        width: 100%
+    .todo__main__task .task__text_block
+        min-width: 100px
