@@ -1,7 +1,7 @@
 @import '_mixins'
 @import '_variables'
 
-.task__recommended
+.task__favorite
     height: 100%
     width: 50%
     background: #fff
@@ -41,22 +41,22 @@
         white-space: normal
         word-break: break-all
 
-.item_recommended_text
+.item_favorite_text
     font-size: $text_font_size
-.item_recommended_date
+.item_favorite_date
     font-size: $date_font_size
-.item_recommended_btn_important
+.item_favorite_btn_favorite
     min-width: 20px
     min-height: 20px
     +button_center()
-    & .btn_important
+    & .btn_favorite
         user-select: none
         color: $main_color
-    &:active .btn_important
+    &:active .btn_favorite
         color: #fff
-.item_recommended_text_content
+.item_favorite_text_content
     width: 75%
 
 @media screen and ( max-width: 390px  )
-    .task__recommended
+    .task__favorite
         width: 80%
