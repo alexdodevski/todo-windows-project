@@ -7,7 +7,19 @@
     width: 100%
     overflow: auto
     margin-bottom: 10px
-    overflow-x: hidden
+    position: relative
+    &__viewport
+        height: 100%
+        overflow: hidden
+        width: 100%
+        position: absolute
+    &__content_box
+        height: 100%
+        position: absolute
+        top: 0
+        left: 0
+        right: -17px
+        overflow-y: scroll
     &__task
         +task_input()
         padding: $padding_task_panel
