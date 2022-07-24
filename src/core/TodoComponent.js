@@ -1,7 +1,7 @@
 import { DomListener } from "./DomListener";
 
 export class TodoComponent extends DomListener {
-  constructor($root, options = {}) {
+  constructor($root, options) {
     super($root, options.listeners);
     this.name = options.name;
   }

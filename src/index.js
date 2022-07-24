@@ -13,3 +13,4 @@ const todo = new Todo("#app", {
 });
 
 todo.render();
+console.log(todo);
