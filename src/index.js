@@ -6,8 +6,9 @@ import { Main } from "./components/main/Main";
 import { TaskPanel } from "./components/task panel/TaskPanel";
 import { Favorites } from "./components/favorites/Favorites";
 import { Themes } from "./components/themes/Themes";
+import { Scrollbar } from "./components/scrollbar/Scrollbar";
 
-const components = [Header, Main, TaskPanel, Favorites, Themes];
+const components = [Header, Main, TaskPanel, Favorites, Themes, Scrollbar];
 const todo = new Todo("#app", {
   components: components,
 });

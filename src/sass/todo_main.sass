@@ -5,14 +5,9 @@
     margin-top: 25px
     height: 350px
     width: 100%
-    overflow: auto
+    overflow: hidden
     margin-bottom: 10px
     position: relative
-    &__viewport
-        height: 100%
-        overflow: hidden
-        width: 100%
-        position: absolute
     &__content_box
         height: 100%
         position: absolute
@@ -20,6 +15,9 @@
         left: 0
         right: -17px
         overflow-y: scroll
+    &__content_tasks
+        @supports (-moz-appearance:none)
+            width: 96%
     &__task
         +task_input()
         padding: $padding_task_panel

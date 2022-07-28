@@ -15,7 +15,7 @@ export class DomListener {
 
       this[method] = this[method].bind(this);
 
-      this.$root.addEventListener(listener, this[method]);
+      this.$root.addEventListener(listener, this[method], true);
     });
   }
   removeDOMListeners() {
