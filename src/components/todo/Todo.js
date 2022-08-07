@@ -1,15 +1,21 @@
 import { DOMutils } from "../../core/dom.utils";
+import { Emitter } from "../../core/Emitter";
 
 export class Todo {
   #CLASS_NAME = "todo";
   constructor(selector, options) {
     this.$app = document.querySelector(selector);
     this.components = options.components || [];
+    this.emitter = new Emitter();
   }
 
   initComponent(Component) {
     const $el = DOMutils.create("div", Component.className);
-    const component = new Component($el);
+    const componentOptions = {
+      emitter: this.emitter,
+    };
+
+    const component = new Component($el, componentOptions);
 
     DOMutils.addHTML(component.$root, component.toHTML());
     this.$todo.append(component.$root);

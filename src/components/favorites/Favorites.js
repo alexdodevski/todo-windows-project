@@ -2,10 +2,11 @@ import { TodoComponent } from "../../core/TodoComponent";
 
 export class Favorites extends TodoComponent {
   static className = "task__favorite";
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: "Favorites",
       listeners: [],
+      ...options,
     });
   }
   toHTML() {

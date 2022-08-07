@@ -1,13 +1,26 @@
 import { TodoComponent } from "../../core/TodoComponent";
+import { MainScrollLogic } from "./MainScrollLogic";
 
 export class Main extends TodoComponent {
   static className = "todo__main";
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: "Main",
       listeners: ["scroll"],
+      ...options,
     });
   }
+
+  init() {
+    super.init();
+    this.mainLogic.init();
+    this.emitEvent("main:scroll create", 100);
+  }
+
+  prepare() {
+    this.mainLogic = new MainScrollLogic(this.$root);
+  }
+
   toHTML() {
     return ` 
           <div class="todo__main__content_box">
@@ -130,7 +143,5 @@ export class Main extends TodoComponent {
  `;
   }
 
-  onScroll(e) {
-    console.log(e);
-  }
+  onScroll(e) {}
 }

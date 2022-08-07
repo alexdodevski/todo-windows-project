@@ -2,10 +2,11 @@ import { TodoComponent } from "../../core/TodoComponent";
 
 export class Themes extends TodoComponent {
   static className = "todo__themes";
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: "Themes",
       listeners: [],
+      ...options,
     });
   }
   toHTML() {
