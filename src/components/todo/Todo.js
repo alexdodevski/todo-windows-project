@@ -18,6 +18,7 @@ export class Todo {
     const component = new Component($el, componentOptions);
 
     DOMutils.addHTML(component.$root, component.toHTML());
+    component.prepare();
     this.$todo.append(component.$root);
 
     return component;

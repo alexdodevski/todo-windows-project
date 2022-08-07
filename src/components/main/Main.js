@@ -14,7 +14,10 @@ export class Main extends TodoComponent {
   init() {
     super.init();
     this.mainLogic.init();
-    this.emitEvent("main:scroll create", 100);
+    const scrollerHeight = parseInt(
+      this.mainLogic.ratio * this.mainLogic.mainHeight
+    );
+    this.emitEvent("main:scroll create", scrollerHeight);
   }
 
   prepare() {
@@ -25,20 +28,7 @@ export class Main extends TodoComponent {
     return ` 
           <div class="todo__main__content_box">
           <div class="todo__main__content_tasks">
-            <div class="todo__main__task">
-            <div class="task__done">
-              <span class="material-symbols-outlined btn_done"> done </span>
-            </div>
-            <div class="task__text_block">
-              <div class="task__text" contenteditable="" spellcheck="false">
-                <p>Хай брооо fewgew,okghrwhijrwhgowrjorwikjgrwoi</p>
-              </div>
-              <span class="task__text_date">13 июля, среда 23:53</span>
-            </div>
-            <div class="task__btn_favorite">
-              <span class="material-symbols-rounded btn_favorite"> star </span>
-            </div>
-          </div>
+           
            <div class="todo__main__task">
             <div class="task__done">
               <span class="material-symbols-outlined btn_done"> done </span>

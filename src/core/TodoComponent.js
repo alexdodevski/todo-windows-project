@@ -6,7 +6,6 @@ export class TodoComponent extends DomListener {
     this.name = options.name;
     this.emitter = options.emitter;
     this.subs = {};
-    this.prepare();
   }
 
   prepare() {}

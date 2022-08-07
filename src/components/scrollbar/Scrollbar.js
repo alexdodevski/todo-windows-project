@@ -9,9 +9,9 @@ export class Scrollbar extends TodoComponent {
       listeners: ["click"],
       ...options,
     });
+    this.scrollLogic = new ScrollLogic(this.$root);
   }
   prepare() {
-    this.scrollLogic = new ScrollLogic(this.$root);
     this.subscribeEvents();
   }
 
