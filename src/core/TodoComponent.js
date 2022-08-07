@@ -5,6 +5,7 @@ export class TodoComponent extends DomListener {
     super($root, options.listeners);
     this.name = options.name;
     this.emitter = options.emitter;
+    this.$todo = options.$todo;
     this.subs = {};
   }
 

@@ -6,25 +6,38 @@ export class Scrollbar extends TodoComponent {
   constructor($root, options) {
     super($root, {
       name: "Scrollbar",
-      listeners: ["click"],
+      listeners: ["mousedown"],
       ...options,
     });
-    this.scrollLogic = new ScrollLogic(this.$root);
+    this.scrollLogic = new ScrollLogic(this.$root, this.$todo);
   }
   prepare() {
     this.subscribeEvents();
   }
 
   subscribeEvents() {
-    this.subscribeOnEvent("main:scroll create", this.scrollLogic.initScroller);
+    this.subscribeOnEvent("main:scroll create", (height, ratio) =>
+      this.scrollLogic.initScroller(height, ratio)
+    );
+    this.subscribeOnEvent("main:scroll content", (scrollTop) =>
+      this.scrollLogic.moveScroll(scrollTop)
+    );
   }
 
   init() {
     super.init();
   }
 
-  onClick(e) {
-    if (e.target.closest(".scroller")) console.log(e.target);
+  onMousedown(e) {
+    if (e.target.closest(".scroller")) {
+      e.preventDefault();
+      const start = e.clientY;
+      const scrollContent = this.emitEvent.bind(
+        this,
+        "scrollbar:scroll content"
+      );
+      this.scrollLogic.dropScroll(start, scrollContent);
+    }
   }
 
   toHTML() {

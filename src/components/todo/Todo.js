@@ -10,9 +10,11 @@ export class Todo {
   }
 
   initComponent(Component) {
+    console.log(this.$todo.offsetHeight);
     const $el = DOMutils.create("div", Component.className);
     const componentOptions = {
       emitter: this.emitter,
+      $todo: this.$todo,
     };
 
     const component = new Component($el, componentOptions);
