@@ -16,6 +16,10 @@
         right: -17px
         overflow-y: scroll
     &__content_tasks
+        width: 96%
+        display: flex
+        flex-direction: column
+        align-items: center
         @supports (-moz-appearance:none)
             width: 96%
     &__task
@@ -52,3 +56,12 @@
         width: 100%
     .todo__main__task .task__text_block
         min-width: 100px
+
+@media screen and (max-width: 450px)
+    .todo__main__task
+        width: 98%
+
+@media  screen and ( max-width: 350px )
+    .todo__main__task
+        width: 95%
+        padding-left: 7px
