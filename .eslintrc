@@ -11,7 +11,8 @@
         "require-jsdoc": "off",
         "object-curly-spacing": "off",
         "space-before-function-paren": "off",
-        "indent": "off"
+        "indent": "off",
+        "prefer-const": "off",
     },
     "extends": [
         "eslint:recommended",

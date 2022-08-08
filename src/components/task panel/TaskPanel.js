@@ -2,10 +2,11 @@ import { TodoComponent } from "../../core/TodoComponent";
 
 export class TaskPanel extends TodoComponent {
   static className = "todo__task_panel";
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: "TaskPanel",
       listeners: [],
+      ...options,
     });
   }
   toHTML() {

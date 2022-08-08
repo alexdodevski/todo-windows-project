@@ -2,10 +2,11 @@ import { TodoComponent } from "../../core/TodoComponent";
 
 export class Header extends TodoComponent {
   static className = "todo__header";
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: "Header",
       listeners: ["click"],
+      ...options,
     });
   }
   toHTML() {

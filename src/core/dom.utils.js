@@ -1,15 +1,15 @@
 export const DOMutils = {
   create(tagName, classes = null) {
-    const el = document.createElement(tagName);
-    if (!classes) return el;
+    const $el = document.createElement(tagName);
+    if (!classes) return $el;
 
     if (typeof classes === "string") {
-      el.classList.add(classes);
+      $el.classList.add(classes);
     } else if (Array.isArray(classes)) {
-      classes.forEach((classItem) => el.classList.add(classItem));
+      classes.forEach((classItem) => $el.classList.add(classItem));
     }
 
-    return el;
+    return $el;
   },
 
   addHTML(el, html) {
