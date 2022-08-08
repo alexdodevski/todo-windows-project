@@ -11,6 +11,7 @@ export class Scrollbar extends TodoComponent {
     });
     this.scrollLogic = new ScrollLogic(this.$root, this.$todo);
   }
+
   prepare() {
     this.subscribeEvents();
   }
@@ -19,24 +20,21 @@ export class Scrollbar extends TodoComponent {
     this.subscribeOnEvent("main:scroll create", (height, ratio) =>
       this.scrollLogic.initScroller(height, ratio)
     );
-    this.subscribeOnEvent("main:scroll content", (scrollTop) =>
-      this.scrollLogic.moveScroll(scrollTop)
-    );
-  }
 
-  init() {
-    super.init();
+    this.subscribeOnEvent("main:scroll content", (y) =>
+      this.scrollLogic.moveScroll(y)
+    );
   }
 
   onMousedown(e) {
     if (e.target.closest(".scroller")) {
       e.preventDefault();
-      const start = e.clientY;
-      const scrollContent = this.emitEvent.bind(
+
+      const emitScrollContent = this.emitEvent.bind(
         this,
         "scrollbar:scroll content"
       );
-      this.scrollLogic.dropScroll(start, scrollContent);
+      this.scrollLogic.scrollStart(e, emitScrollContent);
     }
   }
 

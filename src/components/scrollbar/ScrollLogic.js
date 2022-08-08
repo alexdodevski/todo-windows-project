@@ -22,17 +22,21 @@ export class ScrollLogic {
     return `<div class="${this.#CLASS_NAME}"></div>`;
   }
 
-  moveScroll(top) {
-    this.$scroller.style.top = top + "px";
+  moveScroll(y) {
+    this.$scroller.style.top = y + "px";
   }
 
-  dropScroll(start, fn) {
+  scrollStart(e, emit) {
+    const scrollerTop = this.$scroller.getBoundingClientRect().top;
+    const scrollbarTop = this.$scrollbar.getBoundingClientRect().top;
+
+    let shiftY = e.clientY - scrollerTop;
+
     document.onmousemove = (e) => {
-      this.shiftScroller = start - e.clientY;
+      const shiftScroller = e.clientY - shiftY - scrollbarTop;
+      this.moveScroll(shiftScroller);
 
-      this.$scroller.style.top = -this.shiftScroller + "px";
-
-      this.shiftContent = this.$scroller.offsetTop / this.ratio;
+      const shiftContent = this.$scroller.offsetTop / this.ratio;
 
       const totalheightScroller =
         this.$scroller.offsetHeight + this.$scroller.offsetTop;
@@ -46,9 +50,10 @@ export class ScrollLogic {
         this.moveScroll(maxOffsetScroller);
       }
 
-      fn(this.shiftContent);
+      emit(shiftContent);
       this.start = e.clientY;
     };
+
     document.onmouseup = function () {
       document.onmousemove = null;
       document.onmouseup = null;

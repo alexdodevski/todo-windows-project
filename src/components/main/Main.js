@@ -15,9 +15,7 @@ export class Main extends TodoComponent {
     super.init();
     this.mainLogic.init();
 
-    const scrollerHeight = parseInt(
-      this.mainLogic.ratio * this.mainLogic.mainHeight - 5
-    );
+    const scrollerHeight = this.mainLogic.ratio * this.mainLogic.mainHeight - 2;
     this.emitEvent("main:scroll create", scrollerHeight, this.mainLogic.ratio);
   }
 
