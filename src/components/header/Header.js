@@ -24,7 +24,5 @@ export class Header extends TodoComponent {
           </div>`;
   }
 
-  onClick(e) {
-    console.log(e.target);
-  }
+  onClick(e) {}
 }

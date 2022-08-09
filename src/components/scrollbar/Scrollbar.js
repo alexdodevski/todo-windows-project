@@ -9,7 +9,7 @@ export class Scrollbar extends TodoComponent {
       listeners: ["mousedown"],
       ...options,
     });
-    this.scrollLogic = new ScrollLogic(this.$root, this.$todo);
+    this.logic = new ScrollLogic(this.$root, this.$todo);
   }
 
   prepare() {
@@ -18,11 +18,11 @@ export class Scrollbar extends TodoComponent {
 
   subscribeEvents() {
     this.subscribeOnEvent("main:scroll create", (height, ratio) =>
-      this.scrollLogic.initScroller(height, ratio)
+      this.logic.initScroller(height, ratio)
     );
 
     this.subscribeOnEvent("main:scroll content", (y) =>
-      this.scrollLogic.moveScroll(y)
+      this.logic.moveScroll(y)
     );
   }
 
@@ -34,11 +34,11 @@ export class Scrollbar extends TodoComponent {
         this,
         "scrollbar:scroll content"
       );
-      this.scrollLogic.scrollStart(e, emitScrollContent);
+      this.logic.scrollStart(e, emitScrollContent);
     }
   }
 
   toHTML() {
-    return this.scrollLogic.getScroller();
+    return this.logic.getScroller();
   }
 }

@@ -13,25 +13,25 @@ export class Main extends TodoComponent {
 
   init() {
     super.init();
-    this.mainLogic.init();
+    this.logic.init();
 
-    const scrollerHeight = this.mainLogic.ratio * this.mainLogic.mainHeight - 2;
-    this.emitEvent("main:scroll create", scrollerHeight, this.mainLogic.ratio);
+    const scrollerHeight = this.logic.ratio * this.logic.mainHeight - 5;
+    this.emitEvent("main:scroll create", scrollerHeight, this.logic.ratio);
   }
 
   subscribeEvents() {
     this.subscribeOnEvent("scrollbar:scroll content", (y) =>
-      this.mainLogic.scrollContent(y)
+      this.logic.scrollContent(y)
     );
   }
 
   prepare() {
-    this.mainLogic = new MainScrollLogic(this.$root, this.$todo);
+    this.logic = new MainScrollLogic(this.$root, this.$todo);
     this.subscribeEvents();
   }
 
   onScroll() {
-    const scroll = this.mainLogic.getYscroll();
+    const scroll = this.logic.getYscroll();
     this.emitEvent("main:scroll content", scroll);
   }
   toHTML() {
