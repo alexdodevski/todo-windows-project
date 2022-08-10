@@ -1,6 +1,8 @@
+// import { createTask } from "../../core/create.task";
+
 export class MainLogic {
-  constructor($main, $todo) {
-    this.$main = $main;
+  constructor($root, $todo) {
+    this.$main = $root;
     this.$todo = $todo;
   }
 

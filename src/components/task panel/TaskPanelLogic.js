@@ -1,10 +1,12 @@
-import { createTask } from "../../core/create_task";
+import { createDate } from "../../core/create.date";
+import { createTask } from "../../core/create.task";
 
 export class TaskPanelLogic {
   #PLACEHOLDER_TEXT = "Добавить задачу";
-  constructor($root, $todo) {
+  constructor($root, $todo, dataStorage) {
     this.$taskPanel = $root;
     this.$todo = $todo;
+    this.dataStorage = dataStorage;
   }
 
   init() {
@@ -45,11 +47,23 @@ export class TaskPanelLogic {
       e.preventDefault();
     }
 
-    if (key === keys[0]) {
+    if (key === keys[0] && this.taskText.textContent.trim() !== "") {
       const date = new Date();
-      const task = createTask(date, this.taskText.textContent);
+      const textDate = createDate(date);
+      const id = +date;
+      const text = this.taskText.textContent.trim();
+      const options = {
+        text: text,
+        date: textDate,
+        favorite: false,
+        id: id,
+      };
+
+      const task = createTask(options);
+      this.dataStorage.saveTask(options);
       addTask(task);
       checkScroll();
+
       this.taskText.textContent = "";
     }
   }
