@@ -10,7 +10,7 @@ export class ScrollLogic {
     this.$scrollbar.style.display = "block";
   }
 
-  initScroller(height, ratio) {
+  createScroller(height, ratio) {
     this._showScrollbar();
     this.ratio = ratio;
     this.$scroller = this.$scrollbar.querySelector(`.${this.#CLASS_NAME}`);
@@ -51,7 +51,6 @@ export class ScrollLogic {
       }
 
       emit(shiftContent);
-      this.start = e.clientY;
     };
 
     document.onmouseup = function () {

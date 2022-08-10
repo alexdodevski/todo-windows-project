@@ -3,7 +3,7 @@ export class DataStorage {
     this.data = localStorage;
   }
 
-  saveTask(id, text, favorite = false) {}
+  saveTask(id, data) {}
 
-  getTask(id, text, favorite = false) {}
+  getTask(id, data) {}
 }

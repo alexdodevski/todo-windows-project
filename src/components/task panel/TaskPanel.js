@@ -38,6 +38,8 @@ export class TaskPanel extends TodoComponent {
   }
 
   onKeydown(e) {
-    this.logic.taskDone(e);
+    const addTask = this.emitEvent.bind(this, "taskpanel:add task");
+    const checkScroll = this.emitEvent.bind(this, "taskpanel:check scroll");
+    this.logic.createNewTask(e, addTask, checkScroll);
   }
 }

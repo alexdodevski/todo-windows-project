@@ -13,12 +13,12 @@ export class Scrollbar extends TodoComponent {
   }
 
   prepare() {
-    this.subscribeEvents();
+    this.subEvents();
   }
 
-  subscribeEvents() {
+  subEvents() {
     this.subscribeOnEvent("main:scroll create", (height, ratio) =>
-      this.logic.initScroller(height, ratio)
+      this.logic.createScroller(height, ratio)
     );
 
     this.subscribeOnEvent("main:scroll content", (y) =>

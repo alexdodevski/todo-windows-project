@@ -1,3 +1,5 @@
+import { createTask } from "../../core/create_task";
+
 export class TaskPanelLogic {
   #PLACEHOLDER_TEXT = "Добавить задачу";
   constructor($root, $todo) {
@@ -7,6 +9,8 @@ export class TaskPanelLogic {
 
   init() {
     this.taskText = this.$taskPanel.querySelector(".task__text");
+    this.btnDone = this.$taskPanel.querySelector(".task__done");
+    this.btnCreate = this.$taskPanel.querySelector(".create__btn");
   }
 
   blurPanel($target) {
@@ -16,8 +20,9 @@ export class TaskPanelLogic {
         targetText.trim().length === 0 ||
         targetText.trim() === this.#PLACEHOLDER_TEXT
       ) {
-        console.log("added placeholder");
         $target.textContent = this.#PLACEHOLDER_TEXT;
+        this.btnDone.style.display = "none";
+        this.btnCreate.style.display = "flex";
       }
     }
   }
@@ -27,16 +32,25 @@ export class TaskPanelLogic {
       this.taskText.textContent.trim() === this.#PLACEHOLDER_TEXT
         ? (this.taskText.textContent = "")
         : null;
-
+      this.btnDone.style.display = "block";
+      this.btnCreate.style.display = "none";
       this.taskText.focus();
     }
   }
 
-  taskDone(e) {
+  createNewTask(e, addTask, checkScroll) {
     const keys = ["Enter", "Tab"];
     const key = e.key;
     if (keys.includes(key)) {
       e.preventDefault();
+    }
+
+    if (key === keys[0]) {
+      const date = new Date();
+      const task = createTask(date, this.taskText.textContent);
+      addTask(task);
+      checkScroll();
+      this.taskText.textContent = "";
     }
   }
 }
