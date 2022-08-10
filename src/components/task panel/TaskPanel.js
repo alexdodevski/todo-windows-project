@@ -6,13 +6,13 @@ export class TaskPanel extends TodoComponent {
   constructor($root, options) {
     super($root, {
       name: "TaskPanel",
-      listeners: ["click", "blur", "keydown"],
+      listeners: ["click", "blur", "keydown", "mousedown"],
       ...options,
     });
   }
 
   prepare() {
-    this.logic = new TaskPanelLogic(this.$root, this.$todo);
+    this.logic = new TaskPanelLogic(this.$root, this.$todo, this.dataStorage);
   }
 
   init() {
@@ -30,6 +30,10 @@ export class TaskPanel extends TodoComponent {
   }
 
   onClick(e) {
+    this.logic.hidePlaceHolder(e.target);
+  }
+
+  onMousedown(e) {
     this.logic.hidePlaceHolder(e.target);
   }
 
