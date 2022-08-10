@@ -5,3 +5,7 @@ export function capitalize(eventName) {
 
   return eventName.charAt(0).toUpperCase() + eventName.slice(1);
 }
+
+export function getStrElem(num, arr) {
+  return arr[num].toLowerCase();
+}
