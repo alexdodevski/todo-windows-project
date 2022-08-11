@@ -3,16 +3,17 @@ import { ScrollLogic } from "./ScrollLogic";
 
 export class Scrollbar extends TodoComponent {
   static className = "scrollbar";
+  #CLASS_NAME_SCROLLER = "scroller";
   constructor($root, options) {
     super($root, {
       name: "Scrollbar",
       listeners: ["mousedown"],
       ...options,
     });
-    this.logic = new ScrollLogic(this);
   }
 
   prepare() {
+    this.logic = new ScrollLogic(this);
     this.subEvents();
   }
 
@@ -34,11 +35,11 @@ export class Scrollbar extends TodoComponent {
         this,
         "scrollbar:scroll content"
       );
-      this.logic.scrollStart(e, emitScrollContent);
+      this.logic.scrollerMove(e, emitScrollContent);
     }
   }
 
   toHTML() {
-    return this.logic.getScroller();
+    return `<div class="${this.#CLASS_NAME_SCROLLER}"></div>`;
   }
 }

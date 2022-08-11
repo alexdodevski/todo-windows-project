@@ -24,15 +24,11 @@ export class ScrollLogic {
     this.$scroller.style.height = height + "px";
   }
 
-  getScroller() {
-    return `<div class="${this.#CLASS_NAME}"></div>`;
-  }
-
   moveScroll(y) {
     this.$scroller.style.top = y + "px";
   }
 
-  scrollStart(e, emit) {
+  scrollerMove(e, emit) {
     const scrollerTop = this.$scroller.getBoundingClientRect().top;
     const scrollbarTop = this.$scrollbar.getBoundingClientRect().top;
 
