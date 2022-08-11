@@ -12,12 +12,14 @@ export class ScrollLogic {
     this.$scrollbar.style.display = "block";
   }
 
-  createScroller(height, ratio) {
+  createScroller(height = this.#SCROLLER_HEIGHT_MIN, ratio) {
     this._showScrollbar();
     this.ratio = ratio;
     this.$scroller = this.$scrollbar.querySelector(`.${this.#CLASS_NAME}`);
 
-    if (height <= this.#SCROLLER_HEIGHT_MIN) height = this.#SCROLLER_HEIGHT_MIN;
+    if (height <= this.#SCROLLER_HEIGHT_MIN && height !== 0) {
+      height = this.#SCROLLER_HEIGHT_MIN;
+    }
 
     this.$scroller.style.height = height + "px";
   }

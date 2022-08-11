@@ -8,7 +8,7 @@ export class Main extends TodoComponent {
   constructor($root, options) {
     super($root, {
       name: "Main",
-      listeners: ["scroll"],
+      listeners: ["scroll", "click"],
       ...options,
     });
   }
@@ -48,6 +48,20 @@ export class Main extends TodoComponent {
   onScroll() {
     const scroll = this.logicScroll.getYscroll();
     this.emitEvent("main:scroll content", scroll);
+  }
+
+  onClick(e) {
+    const $target = e.target;
+    if ($target.closest(".task__done")) {
+      this.logicTask.doneTask($target);
+      const createScoller = this.emitEvent.bind(this, "main:scroll create");
+      this.logicScroll.initScroller(createScoller);
+    }
+
+    if ($target.closest(".task__btn_favorite")) {
+      const $btnFavorite = $target.closest(".task__btn_favorite");
+      this.logicTask.toFavorite($btnFavorite);
+    }
   }
 
   toHTML() {
