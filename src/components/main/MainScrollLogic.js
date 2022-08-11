@@ -18,14 +18,17 @@ export class MainScrollLogic {
     this.todoMain.$contentBox.scrollTo(0, y);
   }
 
-  initScroller(emit) {
+  initScroller(createScoller) {
     this.contentHeight = this.todoMain.$content.scrollHeight;
-    if (this.contentHeight <= this.mainHeight) return;
+    if (this.contentHeight <= this.mainHeight) {
+      createScoller(0, this.ratio);
+      return;
+    }
 
     // важно
     this.ratio = this.todoHeight / this.contentHeight;
     const scrollerHeight = this.ratio * this.mainHeight - 5;
 
-    emit(scrollerHeight, this.ratio);
+    createScoller(scrollerHeight, this.ratio);
   }
 }
