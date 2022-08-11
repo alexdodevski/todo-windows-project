@@ -1,6 +1,6 @@
 import { createTask } from "../../core/create.task";
 import { TodoComponent } from "../../core/TodoComponent";
-import { MainLogic } from "./MainLogic";
+import { MainScrollLogic } from "./MainScrollLogic";
 
 export class Main extends TodoComponent {
   static className = "todo__main";
@@ -14,34 +14,39 @@ export class Main extends TodoComponent {
 
   init() {
     super.init();
-    this.logic.init();
-    console.log(this.logic);
+    this.logicScroll.init();
+    this.$content = this.$root.querySelector(".todo__main__content_tasks");
+    this.$contentBox = this.$root.querySelector(".todo__main__content_box");
+
     const emit = this.emitEvent.bind(this, "main:scroll create");
-    this.logic.initScroller(emit);
+    this.logicScroll.initScroller(emit);
   }
 
   subEvents() {
     this.subscribeOnEvent("scrollbar:scroll content", (y) =>
-      this.logic.scrollContent(y)
+      this.logicScroll.scrollContent(y)
     );
     this.subscribeOnEvent("taskpanel:add task", (task) => {
-      this.logic.addTask(task);
+      this.logicScroll.addTask(task);
     });
 
     this.subscribeOnEvent("taskpanel:check scroll", () => {
-      this.logic.initScroller(this.emitEvent.bind(this, "main:scroll create"));
+      this.logicScroll.initScroller(
+        this.emitEvent.bind(this, "main:scroll create")
+      );
     });
   }
 
   prepare() {
-    this.logic = new MainLogic(this.$root, this.$todo);
+    this.logicScroll = new MainScrollLogic(this);
     this.subEvents();
   }
 
   onScroll() {
-    const scroll = this.logic.getYscroll();
+    const scroll = this.logicScroll.getYscroll();
     this.emitEvent("main:scroll content", scroll);
   }
+
   toHTML() {
     return `
     <div class="todo__main__content_box">
