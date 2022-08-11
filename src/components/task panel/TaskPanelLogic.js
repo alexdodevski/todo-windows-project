@@ -3,10 +3,10 @@ import { createTask } from "../../core/create.task";
 
 export class TaskPanelLogic {
   #PLACEHOLDER_TEXT = "Добавить задачу";
-  constructor($root, $todo, dataStorage) {
-    this.$taskPanel = $root;
-    this.$todo = $todo;
-    this.dataStorage = dataStorage;
+  constructor(todoTaskPanel) {
+    this.$taskPanel = todoTaskPanel.$root;
+    this.$todo = todoTaskPanel.$todo;
+    this.dataStorage = todoTaskPanel.dataStorage;
   }
 
   init() {

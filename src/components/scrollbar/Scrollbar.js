@@ -9,7 +9,7 @@ export class Scrollbar extends TodoComponent {
       listeners: ["mousedown"],
       ...options,
     });
-    this.logic = new ScrollLogic(this.$root, this.$todo);
+    this.logic = new ScrollLogic(this);
   }
 
   prepare() {

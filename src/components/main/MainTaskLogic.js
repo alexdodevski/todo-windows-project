@@ -1,6 +1,9 @@
 export class MainTaskLogic {
-  constructor($root, $todo) {
-    this.$main = $root;
-    this.$todo = $todo;
+  constructor(todoMain) {
+    this.todoMain = todoMain;
+  }
+
+  addTask(task) {
+    this.todoMain.$content.innerHTML += task;
   }
 }

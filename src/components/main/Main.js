@@ -1,6 +1,7 @@
 import { createTask } from "../../core/create.task";
 import { TodoComponent } from "../../core/TodoComponent";
 import { MainScrollLogic } from "./MainScrollLogic";
+import { MainTaskLogic } from "./MainTaskLogic";
 
 export class Main extends TodoComponent {
   static className = "todo__main";
@@ -14,7 +15,8 @@ export class Main extends TodoComponent {
 
   init() {
     super.init();
-    this.logicScroll.init();
+    this.logicScroll.initHeight();
+
     this.$content = this.$root.querySelector(".todo__main__content_tasks");
     this.$contentBox = this.$root.querySelector(".todo__main__content_box");
 
@@ -22,12 +24,18 @@ export class Main extends TodoComponent {
     this.logicScroll.initScroller(emit);
   }
 
+  prepare() {
+    this.logicScroll = new MainScrollLogic(this);
+    this.logicTask = new MainTaskLogic(this);
+    this.subEvents();
+  }
+
   subEvents() {
     this.subscribeOnEvent("scrollbar:scroll content", (y) =>
       this.logicScroll.scrollContent(y)
     );
     this.subscribeOnEvent("taskpanel:add task", (task) => {
-      this.logicScroll.addTask(task);
+      this.logicTask.addTask(task);
     });
 
     this.subscribeOnEvent("taskpanel:check scroll", () => {
@@ -35,11 +43,6 @@ export class Main extends TodoComponent {
         this.emitEvent.bind(this, "main:scroll create")
       );
     });
-  }
-
-  prepare() {
-    this.logicScroll = new MainScrollLogic(this);
-    this.subEvents();
   }
 
   onScroll() {

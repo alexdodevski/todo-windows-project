@@ -1,9 +1,11 @@
 export class ScrollLogic {
   #SCROLLER_HEIGHT_MIN = 25;
   #CLASS_NAME = "scroller";
-  constructor($scrollbar, $todo) {
-    this.$scrollbar = $scrollbar;
-    this.$todo = $todo;
+
+  constructor(todoScrollbar) {
+    this.$scrollbar = todoScrollbar.$root;
+    this.$todo = todoScrollbar.$todo;
+    this.todoScrollbar = todoScrollbar;
   }
 
   _showScrollbar() {
@@ -14,7 +16,9 @@ export class ScrollLogic {
     this._showScrollbar();
     this.ratio = ratio;
     this.$scroller = this.$scrollbar.querySelector(`.${this.#CLASS_NAME}`);
+
     if (height <= this.#SCROLLER_HEIGHT_MIN) height = this.#SCROLLER_HEIGHT_MIN;
+
     this.$scroller.style.height = height + "px";
   }
 

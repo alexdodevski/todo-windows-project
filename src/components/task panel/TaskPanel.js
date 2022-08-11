@@ -12,7 +12,7 @@ export class TaskPanel extends TodoComponent {
   }
 
   prepare() {
-    this.logic = new TaskPanelLogic(this.$root, this.$todo, this.dataStorage);
+    this.logic = new TaskPanelLogic(this);
   }
 
   init() {

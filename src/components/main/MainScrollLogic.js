@@ -5,7 +5,7 @@ export class MainScrollLogic {
     this.todoMain = todoMain;
   }
 
-  init() {
+  initHeight() {
     this.mainHeight = this.$main.offsetHeight;
     this.todoHeight = this.$todo.offsetHeight;
   }
