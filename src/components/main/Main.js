@@ -62,13 +62,20 @@ export class Main extends TodoComponent {
       const $btnFavorite = $target.closest(".task__btn_favorite");
       this.logicTask.toFavorite($btnFavorite);
     }
+
+    if ($target.closest(".task__text")) {
+      this.logicTask.toggleFocus($target);
+    }
   }
 
   onKeydown(e) {
+    const enter = e.key === "Enter";
     const $target = e.target;
-    if ($target.closest(".task__text") && e.key === "Enter") {
-      e.preventDefault();
-      this.logicTask.changeTaskText($target);
+
+    if (enter || e.key === "Tab") e.preventDefault();
+
+    if ($target.closest(".task__text")) {
+      this.logicTask.changeTaskText($target, enter);
     }
   }
 
@@ -76,6 +83,7 @@ export class Main extends TodoComponent {
     const $target = e.target;
     if ($target.closest(".task__text")) {
       this.logicTask.changeTaskText($target);
+      this.logicTask.toggleFocus($target);
     }
   }
 

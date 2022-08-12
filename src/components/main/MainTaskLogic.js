@@ -26,12 +26,17 @@ export class MainTaskLogic {
     this.dataStorage.changeFavorite(id, $btn);
   }
 
-  changeTaskText($todo) {
+  changeTaskText($todo, enter = false) {
     const $task = $todo.closest(this.#CLASS_MAIN_TASK);
     const id = DOMutils.getIdTask($task);
     const text = DOMutils.getText($todo);
 
     this.dataStorage.changeText(id, text);
-    $todo.blur();
+    enter ? $todo.blur() : "";
+  }
+
+  toggleFocus($text) {
+    const $task = $text.closest(this.#CLASS_MAIN_TASK);
+    $task.classList.toggle("focus_bg");
   }
 }

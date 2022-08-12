@@ -21,7 +21,7 @@ export const DOMutils = {
   },
 
   getText(el) {
-    return el.textContent;
+    return el.textContent.trim();
   },
 
   getIdTask(el) {

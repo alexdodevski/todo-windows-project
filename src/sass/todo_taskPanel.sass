@@ -3,7 +3,10 @@
 
 .todo__task_panel
     +task_input()
+    transition-duration: 0.3s
     padding: $padding_task_panel
+    &:hover
+        background: rgba(255,255,255,0.8)
     & .create__btn
         min-width: 20px
         min-height: 20px
