@@ -20,26 +20,32 @@ export class TaskPanelLogic {
     if ($target.closest(".task__text")) {
       const $task = $target.closest(".todo__task_panel");
       const targetText = $target.textContent;
+
       if (
         targetText.trim().length === 0 ||
         targetText.trim() === this.#PLACEHOLDER_TEXT
       ) {
         $target.textContent = this.#PLACEHOLDER_TEXT;
+
         this.btnDone.style.display = "none";
         this.btnCreate.style.display = "flex";
+
         $task.classList.remove("focus_bg");
       }
     }
   }
 
-  hidePlaceHolder($target) {
+  focusPanel($target) {
     if ($target.closest(".todo__task_panel")) {
       const $task = $target.closest(".todo__task_panel");
+
       this.taskText.textContent.trim() === this.#PLACEHOLDER_TEXT
         ? (this.taskText.textContent = "")
         : null;
+
       this.btnDone.style.display = "block";
       this.btnCreate.style.display = "none";
+
       this.taskText.focus();
       $task.classList.add("focus_bg");
     }
