@@ -36,4 +36,10 @@ export class DataStorage {
     $btn.classList.toggle("selected");
     this.saveTask(data);
   }
+
+  changeText(id, text) {
+    const data = this.getTask(id);
+    data.text = text;
+    this.saveTask(data);
+  }
 }

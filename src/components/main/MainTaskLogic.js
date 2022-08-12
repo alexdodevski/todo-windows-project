@@ -1,3 +1,5 @@
+import { DOMutils } from "../../core/dom.utils";
+
 export class MainTaskLogic {
   #CLASS_MAIN_TASK = ".todo__main__task";
   constructor(todoMain) {
@@ -11,7 +13,7 @@ export class MainTaskLogic {
 
   doneTask($btn) {
     const $task = $btn.closest(this.#CLASS_MAIN_TASK);
-    const id = $task.dataset.id;
+    const id = DOMutils.getIdTask($task);
 
     this.dataStorage.deleteTask(id);
     $task.remove();
@@ -19,8 +21,17 @@ export class MainTaskLogic {
 
   toFavorite($btn) {
     const $task = $btn.closest(this.#CLASS_MAIN_TASK);
-    const id = $task.dataset.id;
+    const id = DOMutils.getIdTask($task);
 
     this.dataStorage.changeFavorite(id, $btn);
+  }
+
+  changeTaskText($todo) {
+    const $task = $todo.closest(this.#CLASS_MAIN_TASK);
+    const id = DOMutils.getIdTask($task);
+    const text = DOMutils.getText($todo);
+
+    this.dataStorage.changeText(id, text);
+    $todo.blur();
   }
 }

@@ -19,4 +19,12 @@ export const DOMutils = {
   clearHTML(el) {
     this.addHTML(el, "");
   },
+
+  getText(el) {
+    return el.textContent;
+  },
+
+  getIdTask(el) {
+    if (el.dataset.id) return el.dataset.id;
+  },
 };
