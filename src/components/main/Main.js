@@ -8,7 +8,7 @@ export class Main extends TodoComponent {
   constructor($root, options) {
     super($root, {
       name: "Main",
-      listeners: ["scroll", "click"],
+      listeners: ["scroll", "click", "keydown", "blur"],
       ...options,
     });
   }
@@ -61,6 +61,21 @@ export class Main extends TodoComponent {
     if ($target.closest(".task__btn_favorite")) {
       const $btnFavorite = $target.closest(".task__btn_favorite");
       this.logicTask.toFavorite($btnFavorite);
+    }
+  }
+
+  onKeydown(e) {
+    const $target = e.target;
+    if ($target.closest(".task__text") && e.key === "Enter") {
+      e.preventDefault();
+      this.logicTask.changeTaskText($target);
+    }
+  }
+
+  onBlur(e) {
+    const $target = e.target;
+    if ($target.closest(".task__text")) {
+      this.logicTask.changeTaskText($target);
     }
   }
 
