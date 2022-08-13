@@ -24,5 +24,15 @@ export class Header extends TodoComponent {
           </div>`;
   }
 
-  onClick(e) {}
+  onClick(e) {
+    if (e.target.closest(".btn-theme")) {
+      console.log(e.target);
+      this.emitEvent("header:show themes");
+    }
+
+    if (e.target.closest(".btn-favorite")) {
+      console.log(e.target);
+      this.emitEvent("header:show favorites");
+    }
+  }
 }

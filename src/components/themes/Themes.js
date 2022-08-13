@@ -1,13 +1,31 @@
+import { DOMutils } from "../../core/dom.utils";
 import { TodoComponent } from "../../core/TodoComponent";
+import { ThemesLogic } from "./ThemesLogic";
 
 export class Themes extends TodoComponent {
   static className = "todo__themes";
   constructor($root, options) {
     super($root, {
       name: "Themes",
-      listeners: [],
+      listeners: ["click"],
       ...options,
     });
+  }
+  prepare() {
+    this.logic = new ThemesLogic(this);
+    this.subEvents();
+  }
+  subEvents() {
+    this.subscribeOnEvent("header:show themes", () =>
+      DOMutils.toogleClass(this.$root, "opened")
+    );
+  }
+
+  onClick(e) {
+    const $target = e.target;
+    if ($target.closest(".todo_close_btn")) {
+      DOMutils.toogleClass(this.$root, "opened");
+    }
   }
   toHTML() {
     return `<h1 class="todo__themes_header">Выберите тему  

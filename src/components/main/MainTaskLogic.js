@@ -23,7 +23,7 @@ export class MainTaskLogic {
     const $task = $btn.closest(this.#CLASS_MAIN_TASK);
     const id = DOMutils.getIdTask($task);
 
-    this.dataStorage.changeFavorite(id, $btn);
+    this.dataStorage.changeFavoriteTask(id, $btn);
   }
 
   changeTaskText($todo, enter = false) {
@@ -31,7 +31,7 @@ export class MainTaskLogic {
     const id = DOMutils.getIdTask($task);
     const text = DOMutils.getText($todo);
 
-    this.dataStorage.changeText(id, text);
+    this.dataStorage.changeTextTask(id, text);
     enter ? $todo.blur() : "";
   }
 

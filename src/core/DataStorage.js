@@ -29,7 +29,7 @@ export class DataStorage {
       });
   }
 
-  changeFavorite(id, $btn) {
+  changeFavoriteTask(id, $btn) {
     const data = this.getTask(id);
     data.favorite ? (data.favorite = false) : (data.favorite = true);
 
@@ -37,7 +37,7 @@ export class DataStorage {
     this.saveTask(data);
   }
 
-  changeText(id, text) {
+  changeTextTask(id, text) {
     const data = this.getTask(id);
     data.text = text;
     this.saveTask(data);

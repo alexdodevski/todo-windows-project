@@ -27,4 +27,7 @@ export const DOMutils = {
   getIdTask(el) {
     if (el.dataset.id) return el.dataset.id;
   },
+  toogleClass(el, className) {
+    el.classList.toggle(className);
+  },
 };
