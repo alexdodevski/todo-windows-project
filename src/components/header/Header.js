@@ -1,3 +1,4 @@
+import { createDate } from "../../core/create.date";
 import { TodoComponent } from "../../core/TodoComponent";
 
 export class Header extends TodoComponent {
@@ -12,7 +13,7 @@ export class Header extends TodoComponent {
   toHTML() {
     return `<div class="todo__header__block">
             <h1>Мой день</h1>
-            <p class="todo__header__date">пятница, 8 июля</p>
+            <p class="todo__header__date">${createDate(new Date(), true)}</p>
           </div>
           <div class="todo__header__btns">
             <div class="btn-favorite">

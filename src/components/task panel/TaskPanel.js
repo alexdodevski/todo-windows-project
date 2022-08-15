@@ -30,7 +30,7 @@ export class TaskPanel extends TodoComponent {
   }
 
   onClick(e) {
-    this.logic.hidePlaceHolder(e.target);
+    this.logic.focusPanel(e.target);
   }
 
   onMousedown(e) {

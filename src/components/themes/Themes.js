@@ -22,13 +22,14 @@ export class Themes extends TodoComponent {
   }
 
   onClick(e) {
+    console.log(e.target);
     const $target = e.target;
     if ($target.closest(".todo_close_btn")) {
       DOMutils.toogleClass(this.$root, "opened");
     }
 
     if ($target.closest(".themes_item")) {
-      $target.closest(".themes_item");
+      this.logic.select($target.closest(".themes_item"));
     }
   }
   toHTML() {
@@ -41,14 +42,14 @@ export class Themes extends TodoComponent {
             <img class="themes_img" src="https://i.ibb.co/LZcqprg/todo-1.jpg">
             </div>
             <div class="themes_item">
-            <img class="themes_img" src="https://i.ibb.co/52zmtD0/todo-2.jpg"></div>
+            <img class="themes_img" src="https://mobimg.b-cdn.net/v3/fetch/73/7302b46f659c4fb0634272655d564107.jpeg"></div>
             <div class="themes_item">
             <img class="themes_img" src="https://i.ibb.co/5FKpGBL/todo-3.jpg">
             </div>
             </div>
             <div class="todo__themes_items">
               <div class="themes_item">
-              <img class="themes_img" src="https://i.ibb.co/PMFwkPQ/todo-4.jpg"></div>
+              <img class="themes_img" src="https://mota.ru/upload/resize/1440/900/upload/wallpapers/2018/04/14/11/56/56689/15236961285ad1c200bab7b1.17378549-d5d.jpg"></div>
               <div class="themes_item">
               <img class="themes_img" src="https://i.ibb.co/QJ3r86T/todo-5.jpg"></div>
               <div class="themes_item">

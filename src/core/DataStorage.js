@@ -42,4 +42,6 @@ export class DataStorage {
     data.text = text;
     this.saveTask(data);
   }
+
+  changeTheme(id) {}
 }
