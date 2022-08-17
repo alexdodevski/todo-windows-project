@@ -7,7 +7,7 @@ export class TaskPanelLogic {
   constructor(todoTaskPanel) {
     this.$taskPanel = todoTaskPanel.$root;
     this.$todo = todoTaskPanel.$todo;
-    this.dataStorage = todoTaskPanel.dataStorage;
+    this.taskStorage = todoTaskPanel.taskStorage;
   }
 
   init() {
@@ -71,7 +71,7 @@ export class TaskPanelLogic {
       };
 
       const task = createTask(options);
-      this.dataStorage.saveTask(options);
+      this.taskStorage.saveTask(options);
       addTask(task);
       checkScroll();
 

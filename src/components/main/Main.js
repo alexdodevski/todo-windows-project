@@ -91,7 +91,7 @@ export class Main extends TodoComponent {
     return `
     <div class="todo__main__content_box">
       <div class="todo__main__content_tasks">
-      ${this.dataStorage
+      ${this.taskStorage
         .getTasks()
         .map((option) => createTask(option))
         .join("")}

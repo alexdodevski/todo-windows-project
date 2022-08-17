@@ -4,7 +4,7 @@ export class MainTaskLogic {
   #CLASS_MAIN_TASK = ".todo__main__task";
   constructor(todoMain) {
     this.todoMain = todoMain;
-    this.dataStorage = todoMain.dataStorage;
+    this.taskStorage = todoMain.taskStorage;
   }
 
   addTask(task) {
@@ -15,7 +15,7 @@ export class MainTaskLogic {
     const $task = $btn.closest(this.#CLASS_MAIN_TASK);
     const id = DOMutils.getIdTask($task);
 
-    this.dataStorage.deleteTask(id);
+    this.taskStorage.deleteTask(id);
     $task.remove();
   }
 
@@ -23,7 +23,7 @@ export class MainTaskLogic {
     const $task = $btn.closest(this.#CLASS_MAIN_TASK);
     const id = DOMutils.getIdTask($task);
 
-    this.dataStorage.changeFavoriteTask(id, $btn);
+    this.taskStorage.changeFavoriteTask(id, $btn);
   }
 
   changeTaskText($todo, enter = false) {
@@ -31,12 +31,12 @@ export class MainTaskLogic {
     const id = DOMutils.getIdTask($task);
     const text = DOMutils.getText($todo);
 
-    this.dataStorage.changeTextTask(id, text);
+    this.taskStorage.changeTextTask(id, text);
     enter ? $todo.blur() : "";
   }
 
   toggleFocus($text) {
     const $task = $text.closest(this.#CLASS_MAIN_TASK);
-    $task.classList.toggle("focus_bg");
+    DOMutils.toogleClass($task, "focus_bg");
   }
 }

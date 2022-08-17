@@ -1,26 +1,6 @@
-export class DataStorage {
-  constructor() {
-    this.data = localStorage;
-  }
+import { DataStorage } from "./DataStorage";
 
-  saveTask(options) {
-    const id = options.id;
-    options = JSON.stringify(options);
-    localStorage.setItem(id, options);
-  }
-
-  getTask(id) {
-    return JSON.parse(localStorage.getItem(id));
-  }
-
-  clearStorage() {
-    localStorage.clear();
-  }
-
-  deleteTask(id) {
-    localStorage.removeItem(id);
-  }
-
+export class TaskStorage extends DataStorage {
   getTasks() {
     return Object.keys(localStorage)
       .sort((a, b) => a - b)
@@ -42,6 +22,4 @@ export class DataStorage {
     data.text = text;
     this.saveTask(data);
   }
-
-  changeTheme(id) {}
 }
