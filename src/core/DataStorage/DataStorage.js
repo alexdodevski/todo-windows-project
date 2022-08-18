@@ -3,21 +3,30 @@ export class DataStorage {
     this.data = localStorage;
   }
 
-  saveTask(options) {
+  saveItem(key, options) {
+    if (!options.id) {
+      this.data.setItem(key, JSON.stringify(options));
+      return;
+    }
     const id = options.id;
-    options = JSON.stringify(options);
-    localStorage.setItem(id, options);
+    const keyData = this.getItem(key, id);
+    keyData[id] = options;
+    this.data.setItem(key, JSON.stringify(keyData));
   }
 
-  getTask(id) {
-    return JSON.parse(localStorage.getItem(id));
+  getItem(key, id) {
+    const keyData = JSON.parse(this.data.getItem(key));
+    if (!keyData) return;
+    return keyData[id];
   }
 
   clearStorage() {
-    localStorage.clear();
+    this.data.clear();
   }
 
-  deleteTask(id) {
-    localStorage.removeItem(id);
+  deleteItem(key, id) {
+    const keyData = this.getItem(key, id);
+    delete keyData[id];
+    this.saveItem(key, id);
   }
 }
