@@ -5,7 +5,21 @@ export class ThemesStorage extends DataStorage {
     super();
     this.initStorage();
   }
-  selectTheme(id) {}
+  selectTheme(id) {
+    const data = this.getThemes();
+    data.forEach((theme) =>
+      theme.id === id ? (theme.selected = true) : false
+    );
+    this.saveStorage("themes", data);
+  }
+
+  unSelectedTheme(id) {
+    const data = this.getThemes();
+    data.forEach((theme) =>
+      theme.id === id ? (theme.selected = false) : false
+    );
+    this.saveStorage("themes", data);
+  }
 
   getThemesData() {
     return this.getThemes();

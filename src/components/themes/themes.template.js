@@ -25,7 +25,9 @@ function themeBlock(items) {
 }
 
 function createItem(data) {
-  return `<div class="themes_item" data-id="${data.id}">
-    <img class="themes_img" src="${data.src}">
+  return `<div class="themes_item ${
+    data.selected ? "selected" : ""
+  }" data-id="${data.id}">
+    <img class="themes_img" src="${data.src}" >
     </div>`;
 }
