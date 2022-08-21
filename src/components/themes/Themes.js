@@ -27,11 +27,13 @@ export class Themes extends TodoComponent {
   subEvents() {
     this.subscribeOnEvent("header:show themes", () => {
       DOMutils.toogleClass(this.$root, "opened");
+      this.logic.watchClick();
     });
   }
 
   onClick(e) {
     const $target = e.target;
+
     if ($target.closest(".todo_close_btn")) {
       DOMutils.toogleClass(this.$root, "opened");
     }

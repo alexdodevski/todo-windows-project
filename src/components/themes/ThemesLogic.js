@@ -1,6 +1,7 @@
+import { DOMutils } from "../../core/dom.utils";
+
 export class ThemesLogic {
   constructor(themes) {
-    this.themes = themes;
     this.$todoThemes = themes.$root;
     this.$todo = themes.$todo;
     this.themeStorage = themes.themeStorage;
@@ -31,5 +32,16 @@ export class ThemesLogic {
     const $img = $elem.querySelector(".themes_img");
     const pathImg = $img.getAttribute("src");
     return pathImg;
+  }
+
+  watchClick() {
+    setTimeout(() => {
+      document.onclick = (e) => {
+        if (!this.$todoThemes.contains(e.target)) {
+          DOMutils.toogleClass(this.$todoThemes, "opened");
+          document.onclick = null;
+        }
+      };
+    }, 0);
   }
 }

@@ -1,6 +1,8 @@
 export class FavoritesLogic {
   constructor(favorites) {
-    this.favorites = favorites;
-    this.$toodFavorites = favorites.$root;
+    this.$todoFavorites = favorites.$root;
+    this.taskStorage = favorites.taskStorage;
+
+    console.log(this);
   }
 }
