@@ -81,6 +81,10 @@ module.exports = {
         exclude: /node_modules/,
         use: jsLoaders(),
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
     ],
   },
   optimization: {

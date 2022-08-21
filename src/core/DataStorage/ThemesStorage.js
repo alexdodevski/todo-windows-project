@@ -1,4 +1,13 @@
 import { DataStorage } from "./DataStorage";
+import TODO_1 from "@/img/todo-1.jpg";
+import TODO_2 from "@/img/todo-2.jpg";
+import TODO_3 from "@/img/todo-3.jpg";
+import TODO_4 from "@/img/todo-4.jpg";
+import TODO_5 from "@/img/todo-5.jpg";
+import TODO_6 from "@/img/todo-6.jpg";
+import TODO_7 from "@/img/todo-7.png";
+import TODO_8 from "@/img/todo-8.jpg";
+import TODO_9 from "@/img/todo-9.png";
 
 export class ThemesStorage extends DataStorage {
   constructor() {
@@ -45,13 +54,13 @@ export class ThemesStorage extends DataStorage {
 }
 
 const srcImg = [
-  "https://i.ibb.co/1syKXF9/todo-1.jpg",
-  "https://i.ibb.co/0VrHcZ3/todo-2.jpg",
-  "https://i.ibb.co/ccQ4Hq5/todo-3.jpg",
-  "https://i.ibb.co/Y3BtcLQ/todo-4.jpg",
-  "https://i.ibb.co/1LBPgF8/todo-5.jpg",
-  "https://i.ibb.co/QDhnszr/todo-6.jpg",
-  "https://i.ibb.co/mDCm2vf/todo-7.png",
-  "https://i.ibb.co/88qk7VJ/todo-8.jpg",
-  "https://i.ibb.co/YkDYFcK/todo-9.jpg",
+  TODO_1,
+  TODO_2,
+  TODO_3,
+  TODO_4,
+  TODO_5,
+  TODO_6,
+  TODO_7,
+  TODO_8,
+  TODO_9,
 ];
