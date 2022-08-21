@@ -1,4 +1,5 @@
-import { DataStorage } from "../../core/DataStorage";
+import { TaskStorage } from "../../core/DataStorage/TaskStorage";
+import { ThemesStorage } from "../../core/DataStorage/ThemesStorage";
 import { DOMutils } from "../../core/dom.utils";
 import { Emitter } from "../../core/Emitter";
 
@@ -8,7 +9,8 @@ export class Todo {
     this.$app = document.querySelector(selector);
     this.components = options.components || [];
     this.emitter = new Emitter();
-    this.dataStorage = new DataStorage();
+    this.taskStorage = new TaskStorage();
+    this.themesStorage = new ThemesStorage();
   }
 
   initComponent(Component) {
@@ -16,7 +18,8 @@ export class Todo {
     const componentOptions = {
       emitter: this.emitter,
       $todo: this.$todo,
-      dataStorage: this.dataStorage,
+      taskStorage: this.taskStorage,
+      themeStorage: this.themesStorage,
     };
 
     const component = new Component($el, componentOptions);

@@ -8,11 +8,11 @@
     position: absolute
     top: 0
     right: 0
-    border-radius: $border_radius
+    border-radius: 4px
     transition-duration: 0.3s
     transform: translateY(-350px)
     opacity: 0
-    z-index: -10
+    z-index: -1000
     &.opened
         +opened(translateY(0))
     &_header
@@ -24,9 +24,19 @@
         align-items: center
         margin-bottom: 10px
         .themes_item
-            border: 1px solid black
             width: 80px
             height: 80px
             cursor: pointer
+            display: flex
+            justify-content: center
+            align-items: center
+            transition-duration: 0.1s
+            border-radius: 4px
             &.selected
-                border: 2px solid #6acfff
+                border: 4px solid #6acfff
+                border-radius: 10px
+
+.themes_img
+    height: 100%
+    width: 100%
+    border-radius: 4px

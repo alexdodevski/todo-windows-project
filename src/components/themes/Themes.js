@@ -1,5 +1,6 @@
 import { DOMutils } from "../../core/dom.utils";
 import { TodoComponent } from "../../core/TodoComponent";
+import { themesTemplate } from "./themes.template";
 import { ThemesLogic } from "./ThemesLogic";
 
 export class Themes extends TodoComponent {
@@ -11,14 +12,22 @@ export class Themes extends TodoComponent {
       ...options,
     });
   }
+
   prepare() {
     this.logic = new ThemesLogic(this);
     this.subEvents();
   }
+
+  init() {
+    super.init();
+    const selected = this.$root.querySelector(".selected");
+    this.logic.select(selected);
+  }
+
   subEvents() {
-    this.subscribeOnEvent("header:show themes", () =>
-      DOMutils.toogleClass(this.$root, "opened")
-    );
+    this.subscribeOnEvent("header:show themes", () => {
+      DOMutils.toogleClass(this.$root, "opened");
+    });
   }
 
   onClick(e) {
@@ -26,26 +35,17 @@ export class Themes extends TodoComponent {
     if ($target.closest(".todo_close_btn")) {
       DOMutils.toogleClass(this.$root, "opened");
     }
+
+    if ($target.closest(".themes_item")) {
+      this.logic.select($target.closest(".themes_item"));
+    }
   }
   toHTML() {
-    return `<h1 class="todo__themes_header">Выберите тему  
-            <div class="todo_close_btn">
-              <div class="close_btn_item"></div>
-            </div></h1>
-          <div class="todo__themes_items">
-            <div class="themes_item selected"></div>
-            <div class="themes_item"></div>
-            <div class="themes_item"></div>
-            </div>
-            <div class="todo__themes_items">
-              <div class="themes_item"></div>
-              <div class="themes_item"></div>
-              <div class="themes_item"></div>
-            </div>
-             <div class="todo__themes_items">
-              <div class="themes_item"></div>
-              <div class="themes_item"></div>
-              <div class="themes_item"></div>
-            </div>`;
+    return `<h1 class="todo__themes_header">Выберите тему
+        <div class="todo_close_btn">
+          <div class="close_btn_item"></div>
+         </div></h1>
+         ${themesTemplate(this.themeStorage.getThemesData())}
+        `;
   }
 }

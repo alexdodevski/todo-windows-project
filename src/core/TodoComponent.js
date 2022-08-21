@@ -6,7 +6,8 @@ export class TodoComponent extends DomListener {
     this.name = options.name;
     this.emitter = options.emitter;
     this.$todo = options.$todo;
-    this.dataStorage = options.dataStorage;
+    this.taskStorage = options.taskStorage;
+    this.themeStorage = options.themeStorage;
     this.subs = {};
   }
 

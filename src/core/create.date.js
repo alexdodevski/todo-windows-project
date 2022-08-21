@@ -1,12 +1,14 @@
 import { getStrElem } from "./utils";
 
-export function createDate(date) {
+export function createDate(date, header = false) {
   const time = getTime(date);
   const day = getDay(date);
   const mounth = getStrElem(date.getMonth(), months);
   const weekDay = getStrElem(date.getDay(), week);
 
-  return `${day} ${mounth}, ${weekDay} ${time}`;
+  return header
+    ? `${day} ${mounth}, ${weekDay}`
+    : `${day} ${mounth}, ${weekDay} ${time}`;
 }
 
 function getTime(date) {
