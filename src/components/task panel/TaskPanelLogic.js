@@ -71,7 +71,7 @@ export class TaskPanelLogic {
       };
 
       const task = createTask(options);
-      this.taskStorage.saveTask(options);
+      this.taskStorage.addTask(options);
       addTask(task);
       checkScroll();
 

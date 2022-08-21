@@ -1,4 +1,5 @@
 // import { createTask } from "../../core/create.task";
+import { createTask } from "../../core/create.task";
 import { TodoComponent } from "../../core/TodoComponent";
 import { MainScrollLogic } from "./MainScrollLogic";
 import { MainTaskLogic } from "./MainTaskLogic";
@@ -91,13 +92,11 @@ export class Main extends TodoComponent {
     return `
     <div class="todo__main__content_box">
       <div class="todo__main__content_tasks">
-      
+        ${this.taskStorage
+          .getDataTasks()
+          .map((task) => createTask(task))
+          .join("")}
        </div>
      </div>`;
   }
 }
-
-// ${this.taskStorage
-//         .getTasks()
-//         .map((option) => createTask(option))
-//         .join("")}
