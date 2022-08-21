@@ -17,15 +17,17 @@ export class Favorites extends TodoComponent {
   }
 
   subEvents() {
-    this.subscribeOnEvent("header:show favorites", () =>
-      DOMutils.toogleClass(this.$root, "opened")
-    );
+    this.subscribeOnEvent("header:show favorites", () => {
+      this.$root.style.display = "block";
+      setTimeout(() => DOMutils.toogleClass(this.$root, "opened"), 0);
+    });
   }
 
   onClick(e) {
     const $target = e.target;
     if ($target.closest(".todo_close_btn")) {
       DOMutils.toogleClass(this.$root, "opened");
+      setTimeout(() => (this.$root.style.display = "none"), 300);
     }
   }
   toHTML() {
