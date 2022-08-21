@@ -7,17 +7,23 @@ export class ThemesStorage extends DataStorage {
   }
   selectTheme(id) {}
 
-  getThemes() {}
+  getThemesData() {
+    return this.getThemes();
+  }
+
+  getThemes() {
+    return this.getStorage("themes");
+  }
 
   initStorage() {
     if (!this.getStorage("themes")) {
-      const themes = {};
+      const themes = [];
       for (let i = 0; i < srcImg.length; i++) {
         const options = {};
         options.id = i;
         options.src = srcImg[i];
         options.selected = i == 0 ? true : false;
-        themes[i] = options;
+        themes.push(options);
       }
       this.saveStorage("themes", themes);
     }

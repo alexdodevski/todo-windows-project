@@ -1,29 +1,31 @@
-export function themesTemplate(options) {
+export function themesTemplate(data) {
   const themes = [];
-  for (let i = 0; i < 3; i++) {
-    themes.push(themeBlock(options[i]));
+  const themesItems = [];
+  for (let i = 0; i < 9; i++) {
+    themesItems.push(createItem(data[i]));
   }
 
+  for (let i = 0; i <= 3; i++) {
+    let items = themesItems.slice(0, 3);
+    themesItems.splice(0, 3);
+    themes.push(themeBlock(items));
+  }
   return themes.join("");
 }
 
-function themeBlock(...args) {
-  return ` <div class="todo__themes_items">
-            ${themeItem(...args)}
-            </div>`;
-}
-
-function themeItem(...args) {
-  return new Array(3)
+function themeBlock(items) {
+  const result = new Array(3)
     .fill("")
-    .map(createItem(...args))
+    .map((_, index) => {
+      return items[index];
+    })
     .join("");
+
+  return `<div class="todo__themes_items">${result}</div>`;
 }
 
-function createItem(options) {
-  return function (_, index) {
-    return `<div class="themes_item" data-id="${options.id}">
-    <img class="themes_img" src="${options.img[index]}">
+function createItem(data) {
+  return `<div class="themes_item" data-id="${data.id}">
+    <img class="themes_img" src="${data.src}">
     </div>`;
-  };
 }

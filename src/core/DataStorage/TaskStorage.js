@@ -1,4 +1,3 @@
-/* eslint-disable no-prototype-builtins */
 import { DataStorage } from "./DataStorage";
 
 export class TaskStorage extends DataStorage {
