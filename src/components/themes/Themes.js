@@ -36,6 +36,7 @@ export class Themes extends TodoComponent {
 
     if ($target.closest(".todo_close_btn")) {
       DOMutils.toogleClass(this.$root, "opened");
+      document.onclick = null;
     }
 
     if ($target.closest(".themes_item")) {
