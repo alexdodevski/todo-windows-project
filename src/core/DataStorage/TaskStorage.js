@@ -20,18 +20,17 @@ export class TaskStorage extends DataStorage {
     }
   }
 
-  changeFavoriteTask(id, $btn) {
+  changeFavoriteTask(id) {
     const data = this.getTasks();
     data[id].favorite
       ? (data[id].favorite = false)
       : (data[id].favorite = true);
-    $btn.classList.toggle("selected");
 
     this.saveChange(data);
   }
 
   changeTextTask(id, text) {
-    const data = this.getTasks(id);
+    const data = this.getTasks();
     data[id].text = text;
     this.saveChange(data);
   }
@@ -46,6 +45,11 @@ export class TaskStorage extends DataStorage {
 
   getTasks() {
     return this.getStorage("tasks");
+  }
+
+  getTask(id) {
+    const data = this.getTasks();
+    return data[id];
   }
 
   deleteTask(id) {

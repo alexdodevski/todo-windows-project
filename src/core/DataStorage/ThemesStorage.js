@@ -1,4 +1,25 @@
 import { DataStorage } from "./DataStorage";
+import TODO_1 from "@/img/todo-1.jpg";
+import TODO_2 from "@/img/todo-2.jpg";
+import TODO_3 from "@/img/todo-3.jpg";
+import TODO_4 from "@/img/todo-4.jpg";
+import TODO_5 from "@/img/todo-5.jpg";
+import TODO_6 from "@/img/todo-6.jpg";
+import TODO_7 from "@/img/todo-7.png";
+import TODO_8 from "@/img/todo-8.jpg";
+import TODO_9 from "@/img/todo-9.png";
+
+const srcImg = [
+  TODO_1,
+  TODO_2,
+  TODO_3,
+  TODO_4,
+  TODO_5,
+  TODO_6,
+  TODO_7,
+  TODO_8,
+  TODO_9,
+];
 
 export class ThemesStorage extends DataStorage {
   constructor() {
@@ -43,15 +64,3 @@ export class ThemesStorage extends DataStorage {
     }
   }
 }
-
-const srcImg = [
-  "https://i.ibb.co/LZcqprg/todo-1.jpg",
-  "https://mobimg.b-cdn.net/v3/fetch/73/7302b46f659c4fb0634272655d564107.jpeg",
-  "https://i.ibb.co/5FKpGBL/todo-3.jpg",
-  "https://mota.ru/upload/resize/1440/900/upload/wallpapers/2018/04/14/11/56/56689/15236961285ad1c200bab7b1.17378549-d5d.jpg",
-  "https://i.ibb.co/QJ3r86T/todo-5.jpg",
-  "https://i.ibb.co/QDhnszr/todo-6.jpg",
-  "https://i.ibb.co/gzmJT6G/2022-08-13-19-01-02.png",
-  "https://catherineasquithgallery.com/uploads/posts/2021-02/1614280269_53-p-chernii-fon-dlya-futazhei-68.jpg",
-  "https://phonoteka.org/uploads/posts/2022-02/1643921603_3-phonoteka-org-p-korichnevie-doski-fon-4.jpg",
-];

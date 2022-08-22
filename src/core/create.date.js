@@ -1,6 +1,6 @@
 import { getStrElem } from "./utils";
 
-export function createDate(date, header = false) {
+export function createDate(date = new Date(), header = false) {
   const time = getTime(date);
   const day = getDay(date);
   const mounth = getStrElem(date.getMonth(), months);

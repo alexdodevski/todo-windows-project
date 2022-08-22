@@ -1,4 +1,3 @@
-// import { createTask } from "../../core/create.task";
 import { createTask } from "../../core/create.task";
 import { TodoComponent } from "../../core/TodoComponent";
 import { MainScrollLogic } from "./MainScrollLogic";
@@ -44,6 +43,10 @@ export class Main extends TodoComponent {
         this.emitEvent.bind(this, "main:scroll create")
       );
     });
+
+    this.subscribeOnEvent("favorites:remove favorite", (id) => {
+      this.logicTask.unfavorite(id);
+    });
   }
 
   onScroll() {
@@ -54,14 +57,18 @@ export class Main extends TodoComponent {
   onClick(e) {
     const $target = e.target;
     if ($target.closest(".task__done")) {
-      this.logicTask.doneTask($target);
+      const removeFavorite = this.emitEvent.bind(this, "main:favorite done");
+      this.logicTask.doneTask($target, removeFavorite);
+
       const createScoller = this.emitEvent.bind(this, "main:scroll create");
       this.logicScroll.initScroller(createScoller);
     }
 
     if ($target.closest(".task__btn_favorite")) {
       const $btnFavorite = $target.closest(".task__btn_favorite");
-      this.logicTask.toFavorite($btnFavorite);
+      const checkFavorite = this.emitEvent.bind(this, "main:add favorite");
+
+      this.logicTask.toFavorite($btnFavorite, checkFavorite);
     }
 
     if ($target.closest(".task__text")) {
