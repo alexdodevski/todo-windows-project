@@ -83,8 +83,11 @@ export class Main extends TodoComponent {
     if (enter || e.key === "Tab") e.preventDefault();
 
     if ($target.closest(".task__text")) {
-      const id = this.logicTask.changeTaskText($target);
+      const id = this.logicTask.changeTaskText($target, enter);
       this.emitEvent("main:change text favorite", id);
+
+      const createScoller = this.emitEvent.bind(this, "main:scroll create");
+      this.logicScroll.initScroller(createScoller);
     }
   }
 
@@ -95,6 +98,8 @@ export class Main extends TodoComponent {
       this.emitEvent("main:change text favorite", id);
 
       this.logicTask.toggleFocus($target);
+      const createScoller = this.emitEvent.bind(this, "main:scroll create");
+      this.logicScroll.initScroller(createScoller);
     }
   }
 
