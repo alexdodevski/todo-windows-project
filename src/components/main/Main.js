@@ -83,14 +83,17 @@ export class Main extends TodoComponent {
     if (enter || e.key === "Tab") e.preventDefault();
 
     if ($target.closest(".task__text")) {
-      this.logicTask.changeTaskText($target, enter);
+      const id = this.logicTask.changeTaskText($target);
+      this.emitEvent("main:change text favorite", id);
     }
   }
 
   onBlur(e) {
     const $target = e.target;
     if ($target.closest(".task__text")) {
-      this.logicTask.changeTaskText($target);
+      const id = this.logicTask.changeTaskText($target);
+      this.emitEvent("main:change text favorite", id);
+
       this.logicTask.toggleFocus($target);
     }
   }

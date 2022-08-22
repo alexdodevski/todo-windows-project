@@ -55,4 +55,9 @@ export class TaskStorage extends DataStorage {
   deleteTask(id) {
     return this.deleteItem("tasks", id);
   }
+
+  getText(id) {
+    const data = this.getTask(id);
+    return data.text;
+  }
 }

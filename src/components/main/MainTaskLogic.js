@@ -36,6 +36,7 @@ export class MainTaskLogic {
 
     this.taskStorage.changeTextTask(id, text);
     enter ? $todo.blur() : "";
+    return id;
   }
 
   toggleFocus($text) {

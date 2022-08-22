@@ -28,7 +28,7 @@ export class FavoritesLogic {
     const id = DOMutils.getIdTask($task);
 
     unfavorite(id);
-    $task.remove();
+    this.removeFavorite(id);
   }
 
   removeFavorite(id) {
@@ -49,5 +49,14 @@ export class FavoritesLogic {
     } else {
       this.removeFavorite(id);
     }
+  }
+
+  changeText(id) {
+    const $task = this.$todoFavorites.querySelector(`[data-id="${id}"]`);
+    if (!$task) return;
+
+    const text = this.taskStorage.getText(id);
+    const $favoriteText = $task.querySelector(".item_favorite_text");
+    $favoriteText.textContent = text;
   }
 }

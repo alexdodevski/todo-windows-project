@@ -40,6 +40,10 @@ export class Favorites extends TodoComponent {
     this.subscribeOnEvent("main:add favorite", (id) => {
       this.logic.checkFavorite(id);
     });
+
+    this.subscribeOnEvent("main:change text favorite", (id) => {
+      this.logic.changeText(id);
+    });
   }
 
   onClick(e) {
