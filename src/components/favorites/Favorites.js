@@ -1,5 +1,6 @@
 import { DOMutils } from "../../core/dom.utils";
 import { TodoComponent } from "../../core/TodoComponent";
+import { createFavoriteTask } from "./favorite.template";
 import { FavoritesLogic } from "./FavoritesLogic";
 
 export class Favorites extends TodoComponent {
@@ -11,6 +12,13 @@ export class Favorites extends TodoComponent {
       ...options,
     });
   }
+
+  init() {
+    super.init();
+    this.$content = this.$root.querySelector(".task__favorite_tasks");
+    console.log(this.$content);
+  }
+
   prepare() {
     this.logic = new FavoritesLogic(this);
     this.subEvents();
@@ -19,15 +27,33 @@ export class Favorites extends TodoComponent {
   subEvents() {
     this.subscribeOnEvent("header:show favorites", () => {
       this.$root.style.display = "block";
-      setTimeout(() => DOMutils.toogleClass(this.$root, "opened"), 0);
+      setTimeout(() => {
+        DOMutils.toogleClass(this.$root, "opened");
+        this.logic.watchClick();
+      }, 0);
+    });
+
+    this.subscribeOnEvent("main:favorite done", (id) => {
+      this.logic.removeFavorite(id);
+    });
+
+    this.subscribeOnEvent("main:add favorite", (id) => {
+      this.logic.checkFavorite(id);
     });
   }
 
   onClick(e) {
     const $target = e.target;
+
     if ($target.closest(".todo_close_btn")) {
       DOMutils.toogleClass(this.$root, "opened");
+      document.onclick = null;
       setTimeout(() => (this.$root.style.display = "none"), 300);
+    }
+
+    if ($target.closest(".task__done")) {
+      const unfavorite = this.emitEvent.bind(this, "favorites:remove favorite");
+      this.logic.doneFavorite($target, unfavorite);
     }
   }
   toHTML() {
@@ -38,329 +64,12 @@ export class Favorites extends TodoComponent {
             </div>
           </h1>
           <div class="task__favorite_tasks">
-            <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
-                     <div class="task__favorite_item">
-              <div class="task__done">
-                <span class="material-symbols-outlined btn_done"> done </span>
-              </div>
-              <div class="item_favorite_text_content">
-                <p class="item_favorite_text">
-                  Хай броо
-                  okgremkighrejigorejiohrejoihrejhiorejhoirejhiorejhreiohjer
-                  opihjkreiohrejiohrejhioerjhio
-                </p>
-                <span class="item_favorite_date">13 июля, среда 23:53</span>
-              </div>
-              <div class="item_favorite_btn_favorite">
-                <span class="material-symbols-rounded btn_favorite">
-                  star
-                </span>
-              </div>
-              
-            </div>
+             ${this.taskStorage
+               .getDataTasks()
+               .map((task) => {
+                 if (task.favorite) return createFavoriteTask(task);
+               })
+               .join("")}
             
           </div>`;
   }

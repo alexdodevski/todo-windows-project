@@ -11,19 +11,22 @@ export class MainTaskLogic {
     this.todoMain.$content.innerHTML += task;
   }
 
-  doneTask($btn) {
+  doneTask($btn, removeFavorite) {
     const $task = $btn.closest(this.#CLASS_MAIN_TASK);
     const id = DOMutils.getIdTask($task);
 
+    removeFavorite(id);
     this.taskStorage.deleteTask(id);
     $task.remove();
   }
 
-  toFavorite($btn) {
+  toFavorite($btn, checkFavorite) {
     const $task = $btn.closest(this.#CLASS_MAIN_TASK);
     const id = DOMutils.getIdTask($task);
 
-    this.taskStorage.changeFavoriteTask(id, $btn);
+    checkFavorite(id);
+    DOMutils.toogleClass($btn, "selected");
+    this.taskStorage.changeFavoriteTask(id);
   }
 
   changeTaskText($todo, enter = false) {
@@ -38,5 +41,13 @@ export class MainTaskLogic {
   toggleFocus($text) {
     const $task = $text.closest(this.#CLASS_MAIN_TASK);
     DOMutils.toogleClass($task, "focus_bg");
+  }
+
+  unfavorite(id) {
+    const $task = document.querySelector(`[data-id="${id}"]`);
+    const $btn = $task.querySelector(".task__btn_favorite");
+
+    DOMutils.toogleClass($btn, "selected");
+    this.taskStorage.changeFavoriteTask(id);
   }
 }

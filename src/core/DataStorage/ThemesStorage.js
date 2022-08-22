@@ -9,6 +9,18 @@ import TODO_7 from "@/img/todo-7.png";
 import TODO_8 from "@/img/todo-8.jpg";
 import TODO_9 from "@/img/todo-9.png";
 
+const srcImg = [
+  TODO_1,
+  TODO_2,
+  TODO_3,
+  TODO_4,
+  TODO_5,
+  TODO_6,
+  TODO_7,
+  TODO_8,
+  TODO_9,
+];
+
 export class ThemesStorage extends DataStorage {
   constructor() {
     super();
@@ -52,15 +64,3 @@ export class ThemesStorage extends DataStorage {
     }
   }
 }
-
-const srcImg = [
-  TODO_1,
-  TODO_2,
-  TODO_3,
-  TODO_4,
-  TODO_5,
-  TODO_6,
-  TODO_7,
-  TODO_8,
-  TODO_9,
-];
