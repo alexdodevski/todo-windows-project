@@ -1,7 +1,9 @@
+import { createComponent } from "../../core/create.component";
 import { createTask } from "../../core/create.task";
 import { TodoComponent } from "../../core/TodoComponent";
 import { MainScrollLogic } from "./MainScrollLogic";
 import { MainTaskLogic } from "./MainTaskLogic";
+import { Scrollbar } from "./scrollbar/Scrollbar";
 
 export class Main extends TodoComponent {
   static className = "todo__main";
@@ -19,6 +21,7 @@ export class Main extends TodoComponent {
 
     this.$content = this.$root.querySelector(".todo__main__content_tasks");
     this.$contentBox = this.$root.querySelector(".todo__main__content_box");
+    this.createScollbar();
 
     const emit = this.emitEvent.bind(this, "main:scroll create");
     this.logicScroll.initScroller(emit);
@@ -113,5 +116,17 @@ export class Main extends TodoComponent {
           .join("")}
        </div>
      </div>`;
+  }
+
+  createScollbar() {
+    const options = {
+      emitter: this.emitter,
+      $todo: this.$todo,
+      taskStorage: this.taskStorage,
+      themeStorage: this.themesStorage,
+    };
+
+    this.$scrollbar = createComponent(options, Scrollbar);
+    this.$todo.append(this.$scrollbar.$root);
   }
 }

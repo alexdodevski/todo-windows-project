@@ -1,3 +1,4 @@
+import { createComponent } from "../../core/create.component";
 import { TaskStorage } from "../../core/DataStorage/TaskStorage";
 import { ThemesStorage } from "../../core/DataStorage/ThemesStorage";
 import { DOMutils } from "../../core/dom.utils";
@@ -14,7 +15,6 @@ export class Todo {
   }
 
   initComponent(Component) {
-    const $el = DOMutils.create("div", Component.className);
     const componentOptions = {
       emitter: this.emitter,
       $todo: this.$todo,
@@ -22,10 +22,7 @@ export class Todo {
       themeStorage: this.themesStorage,
     };
 
-    const component = new Component($el, componentOptions);
-
-    DOMutils.addHTML(component.$root, component.toHTML());
-    component.prepare();
+    const component = createComponent(componentOptions, Component);
     this.$todo.append(component.$root);
 
     return component;

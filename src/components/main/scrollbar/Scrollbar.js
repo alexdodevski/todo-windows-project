@@ -1,4 +1,4 @@
-import { TodoComponent } from "../../core/TodoComponent";
+import { TodoComponent } from "../../../core/TodoComponent";
 import { ScrollLogic } from "./ScrollLogic";
 
 export class Scrollbar extends TodoComponent {
