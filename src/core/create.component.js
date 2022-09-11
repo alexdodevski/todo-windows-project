@@ -9,3 +9,5 @@ export function createComponent(options, Component) {
 
   return component;
 }
+
+console.log("for git");
