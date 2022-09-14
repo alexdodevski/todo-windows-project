@@ -3,7 +3,7 @@ import { createTask } from "../../core/create.task";
 import { TodoComponent } from "../../core/TodoComponent";
 import { MainScrollLogic } from "./MainScrollLogic";
 import { MainTaskLogic } from "./MainTaskLogic";
-import { Scrollbar } from "./scrollbar/Scrollbar";
+import { MainScrollbar } from "./MainScrollbar";
 
 export class Main extends TodoComponent {
   static className = "todo__main";
@@ -34,7 +34,7 @@ export class Main extends TodoComponent {
   }
 
   subEvents() {
-    this.subscribeOnEvent("scrollbar:scroll content", (y) =>
+    this.subscribeOnEvent("scrollbar main:scroll content", (y) =>
       this.logicScroll.scrollContent(y)
     );
     this.subscribeOnEvent("taskpanel:add task", (task) => {
@@ -126,7 +126,8 @@ export class Main extends TodoComponent {
       themeStorage: this.themesStorage,
     };
 
-    this.$scrollbar = createComponent(options, Scrollbar);
+    this.$scrollbar = createComponent(options, MainScrollbar);
     this.$todo.append(this.$scrollbar.$root);
+    this.$scrollbar.init();
   }
 }

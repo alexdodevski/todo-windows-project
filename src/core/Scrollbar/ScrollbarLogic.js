@@ -1,20 +1,19 @@
-export class ScrollLogic {
+export class ScrollbarLogic {
   #SCROLLER_HEIGHT_MIN = 25;
   #CLASS_NAME = "scroller";
 
-  constructor(todoScrollbar) {
-    this.$scrollbar = todoScrollbar.$root;
-    this.$todo = todoScrollbar.$todo;
-    this.todoScrollbar = todoScrollbar;
+  constructor(scrollbar) {
+    this.$scrollbar = scrollbar.$root;
   }
 
   _showScrollbar() {
     this.$scrollbar.style.display = "block";
   }
 
-  createScroller(height = this.#SCROLLER_HEIGHT_MIN, ratio) {
+  createScroller(height = this.#SCROLLER_HEIGHT_MIN, ratio, root) {
     this._showScrollbar();
     this.ratio = ratio;
+    this.rootHeight = root.offsetHeight;
     this.$scroller = this.$scrollbar.querySelector(`.${this.#CLASS_NAME}`);
 
     if (height <= this.#SCROLLER_HEIGHT_MIN && height !== 0) {
@@ -43,12 +42,11 @@ export class ScrollLogic {
       const totalheightScroller =
         this.$scroller.offsetHeight + this.$scroller.offsetTop;
 
-      const maxOffsetScroller =
-        this.$todo.offsetHeight - this.$scroller.offsetHeight;
+      const maxOffsetScroller = this.rootHeight - this.$scroller.offsetHeight;
 
       if (this.$scroller.offsetTop < 0) this.moveScroll(0);
 
-      if (totalheightScroller >= this.$todo.offsetHeight) {
+      if (totalheightScroller >= this.rootHeight) {
         this.moveScroll(maxOffsetScroller);
       }
 

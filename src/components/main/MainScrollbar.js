@@ -1,25 +1,17 @@
-import { TodoComponent } from "../../../core/TodoComponent";
-import { ScrollLogic } from "./ScrollLogic";
+import { Scrollbar } from "../../core/Scrollbar/Scrollbar";
 
-export class Scrollbar extends TodoComponent {
+export class MainScrollbar extends Scrollbar {
   static className = "scrollbar";
-  #CLASS_NAME_SCROLLER = "scroller";
   constructor($root, options) {
     super($root, {
-      name: "Scrollbar",
-      listeners: ["mousedown"],
+      favorite: false,
       ...options,
     });
   }
 
-  prepare() {
-    this.logic = new ScrollLogic(this);
-    this.subEvents();
-  }
-
   subEvents() {
     this.subscribeOnEvent("main:scroll create", (height, ratio) =>
-      this.logic.createScroller(height, ratio)
+      this.logic.createScroller(height, ratio, this.$todo)
     );
 
     this.subscribeOnEvent("main:scroll content", (y) =>
@@ -33,13 +25,9 @@ export class Scrollbar extends TodoComponent {
 
       const emitScrollContent = this.emitEvent.bind(
         this,
-        "scrollbar:scroll content"
+        "scrollbar main:scroll content"
       );
       this.logic.scrollerMove(e, emitScrollContent);
     }
-  }
-
-  toHTML() {
-    return `<div class="${this.#CLASS_NAME_SCROLLER}"></div>`;
   }
 }

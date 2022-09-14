@@ -1,7 +1,9 @@
+import { createComponent } from "../../core/create.component";
 import { DOMutils } from "../../core/dom.utils";
 import { TodoComponent } from "../../core/TodoComponent";
 import { createFavoriteTask } from "./favorite.template";
 import { FavoritesLogic } from "./FavoritesLogic";
+import { FavoritesScrollbar } from "./FavoritesScrollbar";
 
 export class Favorites extends TodoComponent {
   static className = "task__favorite";
@@ -15,8 +17,9 @@ export class Favorites extends TodoComponent {
 
   init() {
     super.init();
-    this.$content = this.$root.querySelector(".task__favorite_tasks");
-    console.log(this.$content);
+    this.$content = this.$root.querySelector(".task__favorite_content");
+    this.$tasks = this.$root.querySelector(".task__favorite_tasks");
+    this.createScollbar();
   }
 
   prepare() {
@@ -61,20 +64,38 @@ export class Favorites extends TodoComponent {
     }
   }
   toHTML() {
-    return `      <h1 class="task__favorite_header">
-            Избранное
-            <div class="todo_close_btn">
-              <div class="close_btn_item"></div>
-            </div>
-          </h1>
+    return `<h1 class="task__favorite_header">
+                    Избранное
+                <div class="todo_close_btn">
+                    <div class="close_btn_item"></div>
+                </div>
+            </h1>
           <div class="task__favorite_tasks">
+          <div class="task__favorite_viewport">
+          <div class="task__favorite_content">
              ${this.taskStorage
                .getDataTasks()
                .map((task) => {
                  if (task.favorite) return createFavoriteTask(task);
                })
                .join("")}
-            
+          </div>
+          </div>
+          </div>
           </div>`;
+  }
+
+  createScollbar() {
+    const options = {
+      emitter: this.emitter,
+      $todo: this.$todo,
+      taskStorage: this.taskStorage,
+      themeStorage: this.themesStorage,
+    };
+
+    this.$scrollbar = createComponent(options, FavoritesScrollbar);
+    console.log(this.$scrollbar.$root);
+    this.$tasks.append(this.$scrollbar.$root);
+    this.$scrollbar.init();
   }
 }
