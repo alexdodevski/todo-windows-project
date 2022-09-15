@@ -16,10 +16,10 @@ export class Header extends TodoComponent {
             <p class="todo__header__date">${createDate(new Date(), true)}</p>
           </div>
           <div class="todo__header__btns">
-            <div class="btn-favorite">
+            <div class="btn-favorite btn_header">
               <span class="material-symbols-outlined favorite"> star </span>
             </div>
-            <div class="btn-theme">
+            <div class="btn-theme btn_header">
               <span class="change_btn"></span>
             </div>
           </div>`;
