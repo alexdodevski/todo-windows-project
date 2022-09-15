@@ -1,6 +1,6 @@
 import { Scrollbar } from "../../core/Scrollbar/Scrollbar";
 
-export class MainScrollbar extends Scrollbar {
+export class ScrollbarMain extends Scrollbar {
   static className = "scrollbar";
   constructor($root, options) {
     super($root, {

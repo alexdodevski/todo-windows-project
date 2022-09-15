@@ -1,4 +1,4 @@
-import { DOMutils } from "../../core/dom.utils";
+import { DOMutils } from "../../../core/dom.utils";
 
 export class MainTaskLogic {
   #CLASS_MAIN_TASK = ".todo__main__task";

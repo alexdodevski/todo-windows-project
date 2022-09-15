@@ -1,5 +1,5 @@
-import { DOMutils } from "../../core/dom.utils";
-import { createFavoriteTask } from "./favorite.template";
+import { DOMutils } from "../../../core/dom.utils";
+import { createFavoriteTask } from "../favorite.template";
 
 export class FavoritesLogic {
   #CLASS_FAVORITE_TASK = ".task__favorite_item";
@@ -45,7 +45,7 @@ export class FavoritesLogic {
       const data = this.taskStorage.getTask(id);
       const $task = createFavoriteTask(data);
 
-      this.favorites.$content.innerHTML += $task;
+      this.favorites.$tasks.innerHTML += $task;
     } else {
       this.removeFavorite(id);
     }

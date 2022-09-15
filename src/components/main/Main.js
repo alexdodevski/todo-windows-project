@@ -1,9 +1,9 @@
 import { createComponent } from "../../core/create.component";
 import { createTask } from "../../core/create.task";
 import { TodoComponent } from "../../core/TodoComponent";
-import { MainScrollLogic } from "./MainScrollLogic";
-import { MainTaskLogic } from "./MainTaskLogic";
-import { MainScrollbar } from "./MainScrollbar";
+import { MainScrollLogic } from "./logics/MainScrollLogic";
+import { MainTaskLogic } from "./logics/MainTaskLogic";
+import { ScrollbarMain } from "./ScrollbarMain";
 
 export class Main extends TodoComponent {
   static className = "todo__main";
@@ -65,11 +65,13 @@ export class Main extends TodoComponent {
 
       const createScoller = this.emitEvent.bind(this, "main:scroll create");
       this.logicScroll.initScroller(createScoller);
+      this.emitEvent("main -> favorite:scroll create");
     }
 
     if ($target.closest(".task__btn_favorite")) {
       const $btnFavorite = $target.closest(".task__btn_favorite");
       const checkFavorite = this.emitEvent.bind(this, "main:add favorite");
+      this.emitEvent("main -> favorite:scroll create");
 
       this.logicTask.toFavorite($btnFavorite, checkFavorite);
     }
@@ -91,6 +93,7 @@ export class Main extends TodoComponent {
 
       const createScoller = this.emitEvent.bind(this, "main:scroll create");
       this.logicScroll.initScroller(createScoller);
+      this.emitEvent("main -> favorite:scroll create");
     }
   }
 
@@ -126,7 +129,7 @@ export class Main extends TodoComponent {
       themeStorage: this.themesStorage,
     };
 
-    this.$scrollbar = createComponent(options, MainScrollbar);
+    this.$scrollbar = createComponent(options, ScrollbarMain);
     this.$todo.append(this.$scrollbar.$root);
     this.$scrollbar.init();
   }

@@ -4,8 +4,8 @@
 3. Расширить класс для Scrollbar main +++
 4. Расширить класс для Scrollbar favorite +++
 
-5. Написать Scrollbar для favorite(логика, подписки)
-6. Расшарить dist для gh-pages
+5. Написать Scrollbar для favorite(логика, подписки) +++
+6. Расшарить dist для gh-pages ++
 
 7. Рефакторинг кода, мысли по DataStorage
-8. При нажатии на favorite_done убрать задачу из общего списка MAIN
+8. Добавить проверку скроллов по breakpoints

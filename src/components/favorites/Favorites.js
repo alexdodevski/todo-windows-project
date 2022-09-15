@@ -2,28 +2,34 @@ import { createComponent } from "../../core/create.component";
 import { DOMutils } from "../../core/dom.utils";
 import { TodoComponent } from "../../core/TodoComponent";
 import { createFavoriteTask } from "./favorite.template";
-import { FavoritesLogic } from "./FavoritesLogic";
-import { FavoritesScrollbar } from "./FavoritesScrollbar";
+import { FavoritesLogic } from "./logics/FavoritesLogic";
+import { FavoritesScrollLogic } from "./logics/FavoritesScrollLogic";
+import { ScrollbarFavorites } from "./ScrollbarFavorites";
 
 export class Favorites extends TodoComponent {
   static className = "task__favorite";
   constructor($root, options) {
     super($root, {
       name: "Favorites",
-      listeners: ["click"],
+      listeners: ["click", "scroll"],
       ...options,
     });
   }
 
   init() {
     super.init();
+    this.logicScroll.initHeight();
+
     this.$content = this.$root.querySelector(".task__favorite_content");
-    this.$tasks = this.$root.querySelector(".task__favorite_tasks");
+    this.$viewport = this.$root.querySelector(".task__favorite_viewport");
+    this.$tasks = this.$root.querySelector(".task__favorite_content-list");
     this.createScollbar();
+    this.checkScroller();
   }
 
   prepare() {
-    this.logic = new FavoritesLogic(this);
+    this.logicFavorite = new FavoritesLogic(this);
+    this.logicScroll = new FavoritesScrollLogic(this);
     this.subEvents();
   }
 
@@ -32,20 +38,27 @@ export class Favorites extends TodoComponent {
       this.$root.style.display = "block";
       setTimeout(() => {
         DOMutils.toogleClass(this.$root, "opened");
-        this.logic.watchClick();
+        this.logicFavorite.watchClick();
       }, 0);
     });
 
     this.subscribeOnEvent("main:favorite done", (id) => {
-      this.logic.removeFavorite(id);
+      this.logicFavorite.removeFavorite(id);
     });
 
     this.subscribeOnEvent("main:add favorite", (id) => {
-      this.logic.checkFavorite(id);
+      this.logicFavorite.checkFavorite(id);
     });
 
     this.subscribeOnEvent("main:change text favorite", (id) => {
-      this.logic.changeText(id);
+      this.logicFavorite.changeText(id);
+    });
+    this.subscribeOnEvent("scrollbar favorites:scroll content", (y) =>
+      this.logicScroll.scrollContent(y)
+    );
+
+    this.subscribeOnEvent("main -> favorite:scroll create", () => {
+      this.checkScroller();
     });
   }
 
@@ -60,8 +73,15 @@ export class Favorites extends TodoComponent {
 
     if ($target.closest(".task__done")) {
       const unfavorite = this.emitEvent.bind(this, "favorites:remove favorite");
-      this.logic.doneFavorite($target, unfavorite);
+      this.logicFavorite.doneFavorite($target, unfavorite);
+
+      this.checkScroller();
     }
+  }
+
+  checkScroller() {
+    const emit = this.emitEvent.bind(this, "favorites:scroll create");
+    this.logicScroll.initScroller(emit);
   }
   toHTML() {
     return `<h1 class="task__favorite_header">
@@ -73,6 +93,7 @@ export class Favorites extends TodoComponent {
           <div class="task__favorite_tasks">
           <div class="task__favorite_viewport">
           <div class="task__favorite_content">
+          <div class="task__favorite_content-list">
              ${this.taskStorage
                .getDataTasks()
                .map((task) => {
@@ -82,7 +103,13 @@ export class Favorites extends TodoComponent {
           </div>
           </div>
           </div>
+          </div>
           </div>`;
+  }
+
+  onScroll() {
+    const scroll = this.logicScroll.getYscroll();
+    this.emitEvent("favorites:scroll content", scroll);
   }
 
   createScollbar() {
@@ -93,9 +120,8 @@ export class Favorites extends TodoComponent {
       themeStorage: this.themesStorage,
     };
 
-    this.$scrollbar = createComponent(options, FavoritesScrollbar);
-    console.log(this.$scrollbar.$root);
-    this.$tasks.append(this.$scrollbar.$root);
+    this.$scrollbar = createComponent(options, ScrollbarFavorites);
+    this.$viewport.append(this.$scrollbar.$root);
     this.$scrollbar.init();
   }
 }
