@@ -15,9 +15,6 @@
         left: 0
         right: -17px
         overflow-y: scroll
-    &__content_tasks
-        @supports (-moz-appearance:none)
-            width: 96%
     &__task
         +task_input()
         transition-duration: 0.3s
@@ -59,15 +56,10 @@
         height: 200px
         margin-bottom: 20px
 
-@media screen and (max-width: 450px)
-    .todo__main__content_tasks
-        width: 96%
-
 @media screen and ( max-width: 390px )
     .todo__main__task
-        width: 97%
         padding-left: 7px
 
 @media screen and (max-width: 1200px)
-    .todo__main__content_tasks
-        width: 96%
+    .todo__main__task
+        width: calc(100% - 17px)
