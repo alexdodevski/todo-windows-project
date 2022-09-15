@@ -2,7 +2,7 @@ export class MainScrollLogic {
   constructor(todoMain) {
     this.$main = todoMain.$root;
     this.$todo = todoMain.$todo;
-    this.todoMain = todoMain;
+    this.mainComponent = todoMain;
   }
 
   initHeight() {
@@ -11,15 +11,16 @@ export class MainScrollLogic {
   }
 
   getYscroll() {
-    return this.todoMain.$contentBox.scrollTop * this.ratio;
+    return this.mainComponent.$contentBox.scrollTop * this.ratio;
   }
 
   scrollContent(y) {
-    this.todoMain.$contentBox.scrollTo(0, y);
+    this.mainComponent.$contentBox.scrollTo(0, y);
   }
 
   initScroller(createScoller) {
-    this.contentHeight = this.todoMain.$content.scrollHeight;
+    this.contentHeight = this.mainComponent.$content.scrollHeight;
+
     if (this.contentHeight <= this.mainHeight) {
       createScoller(0, this.ratio);
       return;

@@ -29,8 +29,24 @@
     &_tasks
         width: 100%
         padding: 5px
-        overflow: auto
-        height: 490px
+        padding-right: 10px
+        height: 503px
+        position: relative
+    &_viewport
+        position: absolute
+        overflow: hidden
+        left: 5px
+        right: 10px
+        top: 0
+        height: 100%
+    &_content
+        height: 100%
+        position: absolute
+        left: 0
+        right: -17px
+        top: 0
+        overflow-y: scroll
+        padding-right: 10px
     &_item
         border-bottom: 0.1px solid $main_color
         padding: 5px
