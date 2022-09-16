@@ -65,15 +65,16 @@ export class Main extends TodoComponent {
 
       const createScoller = this.emitEvent.bind(this, "main:scroll create");
       this.logicScroll.initScroller(createScoller);
+
       this.emitEvent("main -> favorite:scroll create");
     }
 
     if ($target.closest(".task__btn_favorite")) {
       const $btnFavorite = $target.closest(".task__btn_favorite");
       const checkFavorite = this.emitEvent.bind(this, "main:add favorite");
-      this.emitEvent("main -> favorite:scroll create");
 
       this.logicTask.toFavorite($btnFavorite, checkFavorite);
+      this.emitEvent("main -> favorite:scroll create");
     }
 
     if ($target.closest(".task__text")) {

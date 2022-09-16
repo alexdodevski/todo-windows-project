@@ -10,7 +10,7 @@ export class ScrollbarLogic {
     this.$scrollbar.style.display = "block";
   }
 
-  createScroller(height = this.#SCROLLER_HEIGHT_MIN, ratio = 0, root) {
+  createScroller(height = this.#SCROLLER_HEIGHT_MIN, ratio, root) {
     this._showScrollbar();
     this.ratio = ratio;
     this.rootHeight = root.offsetHeight;

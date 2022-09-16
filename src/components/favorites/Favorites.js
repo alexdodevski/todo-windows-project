@@ -20,9 +20,11 @@ export class Favorites extends TodoComponent {
     super.init();
     this.logicScroll.initHeight();
 
+    this.$example = this.$root.querySelector(".task__favorite_tasks");
     this.$content = this.$root.querySelector(".task__favorite_content");
     this.$viewport = this.$root.querySelector(".task__favorite_viewport");
     this.$tasks = this.$root.querySelector(".task__favorite_content-list");
+
     this.createScollbar();
     this.checkScroller();
   }
@@ -35,11 +37,12 @@ export class Favorites extends TodoComponent {
 
   subEvents() {
     this.subscribeOnEvent("header:show favorites", () => {
-      this.$root.style.display = "block";
-      setTimeout(() => {
-        DOMutils.toogleClass(this.$root, "opened");
-        this.logicFavorite.watchClick();
-      }, 0);
+      DOMutils.toogleClass(this.$root, "opened");
+      // this.$root.style.display = "block";
+      // setTimeout(() => {
+      //   DOMutils.toogleClass(this.$root, "opened");
+      //   this.logicFavorite.watchClick();
+      // }, 0);
     });
 
     this.subscribeOnEvent("main:favorite done", (id) => {
@@ -68,7 +71,7 @@ export class Favorites extends TodoComponent {
     if ($target.closest(".todo_close_btn")) {
       DOMutils.toogleClass(this.$root, "opened");
       document.onclick = null;
-      setTimeout(() => (this.$root.style.display = "none"), 300);
+      // setTimeout(() => (this.$root.style.display = "none"), 300);
     }
 
     if ($target.closest(".task__done")) {
@@ -81,6 +84,8 @@ export class Favorites extends TodoComponent {
 
   checkScroller() {
     const emit = this.emitEvent.bind(this, "favorites:scroll create");
+    this.$content = this.$root.querySelector(".task__favorite_content");
+
     this.logicScroll.initScroller(emit);
   }
   toHTML() {
@@ -121,7 +126,7 @@ export class Favorites extends TodoComponent {
     };
 
     this.$scrollbar = createComponent(options, ScrollbarFavorites);
-    this.$viewport.append(this.$scrollbar.$root);
+    this.$example.append(this.$scrollbar.$root);
     this.$scrollbar.init();
   }
 }

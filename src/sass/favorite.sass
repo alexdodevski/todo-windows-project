@@ -9,6 +9,7 @@
     top: 0
     right: 0
     border-radius: $border_radius
+    z-index: 200
     transform: translateX(250px)
     opacity: 0
     z-index: 0
@@ -30,7 +31,7 @@
         width: 100%
         padding: 5px
         padding-right: 10px
-        height: 503px
+        height: 90%
         position: relative
     &_viewport
         position: absolute
@@ -76,3 +77,7 @@
 @media screen and ( max-width: 390px  )
     .task__favorite
         width: 80%
+
+@media screen and (max-width: 500px)
+    .task__favorite_tasks
+        height: 86%
