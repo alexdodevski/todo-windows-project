@@ -19,6 +19,8 @@
         +task_input()
         transition-duration: 0.3s
         padding: $padding_task_panel
+        @supports (-moz-appearance:none)
+            width: 96%
         &:hover
             background: $hover_bg
         & .task__done
@@ -56,7 +58,7 @@
         min-width: 100px
     .todo__main
         margin-bottom: 20px
-        height: 55vh
+        height: 50vh
 
 @media screen and ( max-width: 390px )
     .todo__main__task
