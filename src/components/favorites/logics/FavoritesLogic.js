@@ -9,20 +9,6 @@ export class FavoritesLogic {
     this.taskStorage = favorites.taskStorage;
   }
 
-  watchClick() {
-    setTimeout(() => {
-      document.onclick = (e) => {
-        if (
-          !this.$todoFavorites.contains(e.target) &&
-          !e.target.closest(".task__done")
-        ) {
-          DOMutils.toogleClass(this.$todoFavorites, "opened");
-          document.onclick = null;
-        }
-      };
-    }, 0);
-  }
-
   doneFavorite($btn, unfavorite) {
     const $task = $btn.closest(this.#CLASS_FAVORITE_TASK);
     const id = DOMutils.getIdTask($task);

@@ -38,11 +38,6 @@ export class Favorites extends TodoComponent {
   subEvents() {
     this.subscribeOnEvent("header:show favorites", () => {
       DOMutils.toogleClass(this.$root, "opened");
-      // this.$root.style.display = "block";
-      // setTimeout(() => {
-      //   DOMutils.toogleClass(this.$root, "opened");
-      //   this.logicFavorite.watchClick();
-      // }, 0);
     });
 
     this.subscribeOnEvent("main:favorite done", (id) => {
@@ -71,7 +66,6 @@ export class Favorites extends TodoComponent {
     if ($target.closest(".todo_close_btn")) {
       DOMutils.toogleClass(this.$root, "opened");
       document.onclick = null;
-      // setTimeout(() => (this.$root.style.display = "none"), 300);
     }
 
     if ($target.closest(".task__done")) {
